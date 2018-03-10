@@ -1,0 +1,38 @@
+<!--
+  Generated template for the SugerirCategoriaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>
+      <ion-icon ios="ios-bulb" md="md-bulb"> SUGERIR CATEGORIA</ion-icon>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="formularioSugerirCategoria" (ngSubmit)="guardarConsultaDeSugerirCategoria()">
+    <ion-list>
+
+      <p text-justify>Introduce el nombre de una categoria que te gustaria que incluyeramos en nuestra aplicación</p>
+      <ion-item>
+        <ion-textarea cols="45" rows="6" formControlName="comentario1" placeholder="Introduce la categoria que te interesaría que apareciera"></ion-textarea>
+      </ion-item>
+
+      <p text-justify>Descripción de cómo te gustaría que esa categoria se implementase en nuestra aplicación</p>
+      <ion-item>
+        <ion-textarea cols="45" rows="6" formControlName="comentario2" placeholder="Describe que secciones te gustaría que aparecieran"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!formularioSugerirCategoria.valid">Guardar</button>
+    </div>
+  </form>
+</ion-content>
