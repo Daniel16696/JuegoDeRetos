@@ -18,6 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SugerirCategoriaPage } from '../pages/sugerir-categoria/sugerir-categoria';
 import { AyudaPage } from '../pages/ayuda/ayuda';
+import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
 
 
 
@@ -30,7 +31,8 @@ import { AyudaPage } from '../pages/ayuda/ayuda';
     TabsPage,
     RankingPage,
     SugerirCategoriaPage,
-    AyudaPage
+    AyudaPage,
+    InicioDelJuegoPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { AyudaPage } from '../pages/ayuda/ayuda';
     TabsPage,
     RankingPage,
     SugerirCategoriaPage,
-    AyudaPage
+    AyudaPage,
+    InicioDelJuegoPage
   ],
   providers: [
     StatusBar,
