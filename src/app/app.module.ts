@@ -20,6 +20,10 @@ import { SugerirCategoriaPage } from '../pages/sugerir-categoria/sugerir-categor
 import { AyudaPage } from '../pages/ayuda/ayuda';
 import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
 
+import { HttpClientModule } from '@angular/common/http';
+import { UserServiceProvider } from '../providers/user-service/user-service';
+
+
 
 
 @NgModule({
@@ -36,6 +40,7 @@ import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -53,6 +58,7 @@ import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
   providers: [
     StatusBar,
     SplashScreen,
+    UserServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
