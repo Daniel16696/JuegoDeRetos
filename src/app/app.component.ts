@@ -10,6 +10,7 @@ import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  
   // rootPage:any = TabsPage;
   rootPage: any = InicioDelJuegoPage;
 

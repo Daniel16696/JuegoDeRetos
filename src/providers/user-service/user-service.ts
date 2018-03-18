@@ -37,4 +37,16 @@ export class UserServiceProvider {
     });
   }
 
+  getUsuariosRanking() {
+    return this.http.get('http://localhost:8080/Slim/obtenerTodosUsuariosRanking');
+  }
+
+
+  getUsuarioDelMovilUsando(nickname) {
+    return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcretoPorNickName/'+nickname);
+  }
+
+  borrarUsuarioConfiguracion(id) {
+    return this.http.delete('http://localhost:8080/Slim/borrarUsuarioConfiguracion/'+id);
+  }
 }

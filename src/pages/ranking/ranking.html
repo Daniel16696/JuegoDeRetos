@@ -7,17 +7,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title text-center><ion-icon ios="ios-trophy" md="md-trophy"> CLASIFICATORIA</ion-icon></ion-title>
+    <ion-title text-center>
+      <ion-icon ios="ios-trophy" md="md-trophy"> CLASIFICATORIA</ion-icon>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- Empieza la seccion del ranking -->
   <!-- Lista del ranking de clasificatoria global -->
   <ion-list>
-    <!-- Primer item -->
+
+    <ion-item *ngFor="let item of usuariosRanking; let i = index">
+      <ion-avatar item-start>
+        <div>{{i+1}}</div>
+        <img src="assets/imgs/icono-imagen.jpg">
+      </ion-avatar>
+      <h2>{{item.nickname}}</h2>
+      <div clear item-end>
+        <p>Ganadas</p>
+        <p text-center>{{item.victoriasRondas}}</p>
+      </div>
+    </ion-item>
+
+
+    <!-- Primer item
     <ion-item>
       <ion-avatar item-start>
         <div>1</div>
@@ -29,7 +48,7 @@
         <p text-center>1000000</p>
       </div>
     </ion-item>
-    <!-- Segundo item -->
+    Segundo item
     <ion-item>
       <ion-avatar item-start>
         <div>2</div>
@@ -41,7 +60,7 @@
         <p text-center>1000000</p>
       </div>
     </ion-item>
-    <!-- Tercer item -->
+    Tercer item
     <ion-item>
       <ion-avatar item-start>
         <div>3</div>
@@ -53,7 +72,7 @@
         <p text-center>1000000</p>
       </div>
     </ion-item>
-    <!-- Cuarto item -->
+    Cuarto item
     <ion-item>
       <ion-avatar item-start>
         <div>4</div>
@@ -64,7 +83,7 @@
         <p>Ganadas</p>
         <p text-center>1000000</p>
       </div>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
   <!-- Termina la seccion del ranking -->
 </ion-content>
