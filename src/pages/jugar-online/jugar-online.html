@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+    <progress-bar [progress]="loadProgress"></progress-bar>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row class="borderTituloPregunta">
+      <ion-col col-12 text-center>
+        Escribe todos los animales que empiezen por la letra "p"
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="borderRespuestaAPregunta">
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-6 text-left>
+        Respuesta
+      </ion-col>
+      <ion-col col-2 text-right>
+        <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="borderRespuestaAPregunta">
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-6 text-left>
+        Respuesta
+      </ion-col>
+      <ion-col col-2 text-right>
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+
+  <form [formGroup]="formularioEnviarRespuestas" (ngSubmit)="guardarFormularioEnviarRespuestas()">
+    <ion-item>
+      <ion-input id="inputDeEnviarRespuestas" type="text" formControlName="respuesta" placeholder="Escriba aquí" maxlength="28"></ion-input>
+      <button id="botonRespuestas" clear ion-button type="submit" color="danger" small item-right [disabled]="!formularioEnviarRespuestas.valid">Siguiente</button>
+    </ion-item>
+  </form>
+
+</ion-content>

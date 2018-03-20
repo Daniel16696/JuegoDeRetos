@@ -22,6 +22,8 @@ import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { JugarOnlinePage } from '../pages/jugar-online/jugar-online';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 
 
@@ -36,7 +38,9 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     RankingPage,
     SugerirCategoriaPage,
     AyudaPage,
-    InicioDelJuegoPage
+    InicioDelJuegoPage,
+    JugarOnlinePage,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     RankingPage,
     SugerirCategoriaPage,
     AyudaPage,
-    InicioDelJuegoPage
+    InicioDelJuegoPage,
+    JugarOnlinePage
   ],
   providers: [
     StatusBar,

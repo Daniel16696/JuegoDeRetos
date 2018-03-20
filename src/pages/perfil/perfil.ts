@@ -10,7 +10,8 @@ export class PerfilPage {
   usuariosActualDelDispositivo: any;
 
 
-
+  usuariosRankingPosicion: any;
+  public posicionRanking;
 
   constructor(public navCtrl: NavController, public userService: UserServiceProvider) {
     console.log(localStorage.getItem('nickUsuarioAplicacion'));
@@ -20,6 +21,26 @@ export class PerfilPage {
         (data) => { // Success
           this.usuariosActualDelDispositivo = data;
           console.log(this.usuariosActualDelDispositivo[0].nickname);
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+
+    this.userService.getUsuariosRanking()
+      .subscribe(
+        (data) => { // Success
+          this.usuariosRankingPosicion = data;
+          console.log(this.usuariosRankingPosicion);
+
+          for (let i = 0; i < this.usuariosRankingPosicion.length; i++) {
+
+            if (this.usuariosRankingPosicion[i].nickname == localStorage.getItem('nickUsuarioAplicacion')) {
+              this.posicionRanking = i + 1;
+              console.log(this.posicionRanking);
+
+            }
+          }
         },
         (error) => {
           console.error(error);
@@ -39,6 +60,26 @@ export class PerfilPage {
         (data) => { // Success
           this.usuariosActualDelDispositivo = data;
           console.log(this.usuariosActualDelDispositivo[0].nickname);
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+
+    this.userService.getUsuariosRanking()
+      .subscribe(
+        (data) => { // Success
+          this.usuariosRankingPosicion = data;
+          console.log(this.usuariosRankingPosicion);
+
+          for (let i = 0; i < this.usuariosRankingPosicion.length; i++) {
+
+            if (this.usuariosRankingPosicion[i].nickname == localStorage.getItem('nickUsuarioAplicacion')) {
+              this.posicionRanking = i + 1;
+              console.log(this.posicionRanking);
+
+            }
+          }
         },
         (error) => {
           console.error(error);
