@@ -14,39 +14,78 @@ export class UserServiceProvider {
     console.log('Hello UserServiceProvider Provider');
   }
   getUsers() {
-    return this.http.get('http://localhost:8080/Slim/obtenerUsuarios');
+    try {
+      return this.http.get('http://localhost:8080/Slim/obtenerUsuarios');
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   postDatos(nicknameUsuario) {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    let datos = { nickname: nicknameUsuario, victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0' }
-    console.log(datos);
-    // let options = {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // };
-    console.log(JSON.stringify(datos));
-    var url = 'http://localhost:8080/Slim/nuevoUsuario';
-    return new Promise(resolve => {
-      this.http.post(url, JSON.stringify(datos), httpOptions)
-        .subscribe(data => {
-          resolve(data);
-          console.log(data);
-        });
-    });
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { nickname: nicknameUsuario, victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0' }
+      console.log(datos);
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/nuevoUsuario';
+      return new Promise(resolve => {
+        this.http.post(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   getUsuariosRanking() {
-    return this.http.get('http://localhost:8080/Slim/obtenerTodosUsuariosRanking');
+    try {
+      return this.http.get('http://localhost:8080/Slim/obtenerTodosUsuariosRanking');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
   getUsuarioDelMovilUsando(nickname) {
-    return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcretoPorNickName/'+nickname);
+    try {
+      return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcretoPorNickName/' + nickname);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   borrarUsuarioConfiguracion(id) {
-    return this.http.delete('http://localhost:8080/Slim/borrarUsuarioConfiguracion/'+id);
+    try {
+      return this.http.delete('http://localhost:8080/Slim/borrarUsuarioConfiguracion/' + id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  enviarSugerenciaDeCategoria(comentario1, comentario2) {
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { comentario1: comentario1, comentario2: comentario2 }
+      console.log(datos);
+
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/enviarEmailSugerencias';
+      return new Promise(resolve => {
+        this.http.post(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 }

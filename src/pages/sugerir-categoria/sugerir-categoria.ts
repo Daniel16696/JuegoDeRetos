@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 /**
  * Generated class for the SugerirCategoriaPage page.
@@ -15,10 +16,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: 'sugerir-categoria.html',
 })
 export class SugerirCategoriaPage {
-  
-  formularioSugerirCategoria: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+  formularioSugerirCategoria: FormGroup;
+  usuariosConSusComentarios: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public userService: UserServiceProvider, public alertCtrl: AlertController) {
     this.formularioSugerirCategoria = this.crearFormularioDeSugerirCategoria();
   }
 
@@ -27,7 +28,21 @@ export class SugerirCategoriaPage {
   }
 
   guardarConsultaDeSugerirCategoria() {
-    console.log(this.formularioSugerirCategoria.value);
+    try {
+      console.log(this.formularioSugerirCategoria.value);
+      console.log(this.formularioSugerirCategoria.value.comentario1);
+      console.log(this.formularioSugerirCategoria.value.comentario2);
+
+      this.userService.enviarSugerenciaDeCategoria(this.formularioSugerirCategoria.value.comentario1, this.formularioSugerirCategoria.value.comentario2);
+      let alert = this.alertCtrl.create({
+        title: 'Ha sido enviado el mensaje',
+        subTitle: 'Gracias por colaborar!',
+        buttons: ['Ok']
+      });
+      alert.present();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private crearFormularioDeSugerirCategoria() {

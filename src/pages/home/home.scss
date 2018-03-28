@@ -1,6 +1,12 @@
 page-home {
+    font-family: "Raleway" !important;
     ion-content{
         background-color: #e6e5e5 !important;
+    }
+    
+    // Titulo de la aplicacion
+    .toolbar-title-md{
+        font-size: 3rem !important;
     }
 }
 

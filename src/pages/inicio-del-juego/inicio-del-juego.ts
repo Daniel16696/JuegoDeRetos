@@ -29,35 +29,7 @@ export class InicioDelJuegoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InicioDelJuegoPage');
   }
-  // guardarNicknameUsuario() {
-  //   this.userService.getUsuarioDelMovilUsando(this.nicknameUsuario.value.nickname)
-  //     .subscribe(
-  //       (data) => { // Success
-
-  //         if (data == []) {
-  //           // this.users = data;
-  //           // console.log(data);
-  //           let alert = this.alertCtrl.create({
-  //             title: 'Este usuario ya existe',
-  //             subTitle: 'Introduzca otro nickname',
-  //             buttons: ['Ok']
-  //           });
-  //           alert.present();
-  //         } else {
-  //           console.log("por que entras");
-  //           this.userService.postDatos(this.nicknameUsuario.value.nickname);
-  //           console.log(this.nicknameUsuario.value.nickname);
-  //           window.localStorage['nickUsuarioAplicacion'] = this.nicknameUsuario.value.nickname;
-  //           this.navCtrl.push(TabsPage);
-  //         }
-
-  //       },
-  //       (error) => {
-  //         console.error(error);
-  //       }
-  //     )
-
-  // }
+  
   guardarNicknameUsuario() {
     let detectarBoolean = false;
     this.userService.getUsers()

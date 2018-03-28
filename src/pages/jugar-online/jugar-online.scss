@@ -1,4 +1,9 @@
-page-jugar-online {
+page-jugar-online {    
+    font-family: "Raleway";
+    font-weight: bolder;
+    ion-content{
+        background-color: #e6e5e5 !important;
+    }
     .borderTituloPregunta{
         border:2px solid #747474;
     }

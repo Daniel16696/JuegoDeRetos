@@ -16,6 +16,6 @@ export class TabsPage {
   tab4Root = RankingPage
 
   constructor() {
-
+    
   }
 }
