@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 
-/**
- * Generated class for the SugerirCategoriaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-sugerir-categoria',
@@ -30,16 +23,15 @@ export class SugerirCategoriaPage {
   guardarConsultaDeSugerirCategoria() {
     try {
       console.log(this.formularioSugerirCategoria.value);
-      console.log(this.formularioSugerirCategoria.value.comentario1);
-      console.log(this.formularioSugerirCategoria.value.comentario2);
-
-      this.userService.enviarSugerenciaDeCategoria(this.formularioSugerirCategoria.value.comentario1, this.formularioSugerirCategoria.value.comentario2);
+      console.log(this.formularioSugerirCategoria.value.comentario);
+      this.userService.enviarSugerenciaDeCategoria(this.formularioSugerirCategoria.value.comentario);
       let alert = this.alertCtrl.create({
         title: 'Ha sido enviado el mensaje',
-        subTitle: 'Gracias por colaborar!',
+        subTitle: '¡Gracias por colaborar!',
         buttons: ['Ok']
       });
       alert.present();
+      this.formularioSugerirCategoria = this.crearFormularioDeSugerirCategoria();
     } catch (error) {
       console.log(error);
     }
@@ -47,8 +39,7 @@ export class SugerirCategoriaPage {
 
   private crearFormularioDeSugerirCategoria() {
     return this.formBuilder.group({
-      comentario1: ['', Validators.required],
-      comentario2: ['', Validators.required],
+      comentario: ['', Validators.required],
     });
   }
 

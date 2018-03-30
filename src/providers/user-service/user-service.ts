@@ -1,12 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-/*
-  Generated class for the UserServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserServiceProvider {
 
@@ -68,10 +62,10 @@ export class UserServiceProvider {
     }
   }
 
-  enviarSugerenciaDeCategoria(comentario1, comentario2) {
+  enviarSugerenciaDeCategoria(comentario) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { comentario1: comentario1, comentario2: comentario2 }
+      let datos = { comentario: comentario }
       console.log(datos);
 
       console.log(JSON.stringify(datos));
@@ -88,4 +82,44 @@ export class UserServiceProvider {
     }
 
   }
+  enviarEmailDeContactarnos(nombre, email, comentario) {
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { nombre: nombre, email: email, comentario: comentario }
+      console.log(datos);
+
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/enviarEmailContactanos';
+      return new Promise(resolve => {
+        this.http.post(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  cambiarNicknameDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje) {
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje }
+      console.log(datos);
+
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/cambiarNicknameDelUsuario/' + id;
+      return new Promise(resolve => {
+        this.http.put(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }

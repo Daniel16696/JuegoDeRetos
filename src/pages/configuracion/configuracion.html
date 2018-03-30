@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title text-center>
-      <ion-icon ios="ios-star-half" md="md-star-half"> CONFIGURACION</ion-icon>
+      CONFIGURACION
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -20,7 +20,7 @@
 
       <ion-item>
         <ion-icon ios="ios-person" md="md-person" item-start></ion-icon>
-        <ion-label>{{item.nickname}}</ion-label>
+        <ion-label (click)="presentPrompt();">{{item.nickname}}</ion-label>
       </ion-item>
 
       <ion-item>
@@ -30,7 +30,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon ios="ios-power" md="md-power" item-start></ion-icon>
+        <ion-icon ios="ios-trash" md="md-trash" item-start></ion-icon>
+        <!-- <ion-icon ios="ios-power" md="md-power" item-start></ion-icon> -->
         <ion-label (click)="borrarCuenta();">Eliminar cuenta</ion-label>
       </ion-item>
 
@@ -48,9 +49,10 @@
         <ion-icon ios="ios-bulb" md="md-bulb" item-start></ion-icon>
       </ion-item>
 
-      <ion-item (click)="ayuda();">
-        <ion-icon ios="ios-help" md="md-help" item-start></ion-icon>
-        <ion-label>Ayuda</ion-label>
+      <ion-item (click)="contactanos();">
+        <ion-icon ios="ios-contacts" md="md-contacts" item-start></ion-icon>
+        <!-- <ion-icon ios="ios-help" md="md-help" item-start></ion-icon> -->
+        <ion-label>Contáctanos</ion-label>
       </ion-item>
 
     </ion-list>

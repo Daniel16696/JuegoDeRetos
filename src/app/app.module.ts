@@ -17,7 +17,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SugerirCategoriaPage } from '../pages/sugerir-categoria/sugerir-categoria';
-import { AyudaPage } from '../pages/ayuda/ayuda';
+import { ContactanosPage } from '../pages/contactanos/contactanos';
 import { InicioDelJuegoPage } from '../pages/inicio-del-juego/inicio-del-juego';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -37,7 +37,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     TabsPage,
     RankingPage,
     SugerirCategoriaPage,
-    AyudaPage,
+    ContactanosPage,
     InicioDelJuegoPage,
     JugarOnlinePage,
     ProgressBarComponent
@@ -56,7 +56,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     TabsPage,
     RankingPage,
     SugerirCategoriaPage,
-    AyudaPage,
+    ContactanosPage,
     InicioDelJuegoPage,
     JugarOnlinePage
   ],

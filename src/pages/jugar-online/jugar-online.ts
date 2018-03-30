@@ -15,29 +15,11 @@ export class JugarOnlinePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
     this.formularioEnviarRespuestas = this.crearFormularioEnviarRespuesta();
-    // let ARRAYGLOBALPREGUNTAS = 
-    // [
-    //   "PreguntasPerros","PreguntasGatos"
-    // ];
-
-    // let arrayAbecedario = 
-    // [
-    //   "a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z"
-    // ];
-
-    // let PreguntasPerros =
-    // [
-    //   "¿Razas de perros que empiezen por {{variableLetraAbecedario}}?"
-    // ];
-
-    // let PreguntasGatos =
-    // [
-    //   "¿Razas de gatos que empiezen por {{variableLetraAbecedario}}?"
-    // ];
   }
 
   guardarFormularioEnviarRespuestas() {
     console.log(this.formularioEnviarRespuestas.value.respuesta);
+    this.formularioEnviarRespuestas = this.crearFormularioEnviarRespuesta();
     // document.getElementById("inputDeEnviarRespuestas").innerHTML = "";
   }
 

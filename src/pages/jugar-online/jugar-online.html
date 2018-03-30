@@ -6,9 +6,9 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <ion-grid>
+  <ion-grid padding>
     <ion-row class="borderTituloPregunta">
       <ion-col col-12 text-center>
         Escribe todos los animales que empiezen por la letra "p"
@@ -45,11 +45,9 @@
 
 
 
-
-
   <form [formGroup]="formularioEnviarRespuestas" (ngSubmit)="guardarFormularioEnviarRespuestas()">
     <ion-item>
-      <ion-input id="inputDeEnviarRespuestas" type="text" formControlName="respuesta" placeholder="Escriba aquí" maxlength="28"></ion-input>
+      <ion-input clearInput id="inputDeEnviarRespuestas" type="text" formControlName="respuesta" placeholder="Escriba aquí" maxlength="28"></ion-input>
       <button id="botonRespuestas" clear ion-button type="submit" color="danger" small item-right [disabled]="!formularioEnviarRespuestas.valid">Siguiente</button>
     </ion-item>
   </form>
