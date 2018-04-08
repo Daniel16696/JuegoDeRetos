@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { JugarOnlinePage } from '../pages/jugar-online/jugar-online';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { RondasPage } from '../pages/rondas/rondas';
 
 
 
@@ -40,7 +41,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     ContactanosPage,
     InicioDelJuegoPage,
     JugarOnlinePage,
-    ProgressBarComponent
+    ProgressBarComponent,
+    RondasPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     SugerirCategoriaPage,
     ContactanosPage,
     InicioDelJuegoPage,
-    JugarOnlinePage
+    JugarOnlinePage,
+    RondasPage
   ],
   providers: [
     StatusBar,

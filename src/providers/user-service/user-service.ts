@@ -122,4 +122,11 @@ export class UserServiceProvider {
     }
   }
 
+  getTresPreguntas() {
+    try {
+      return this.http.get('http://localhost:8080/Slim/obtenerLasTresPreguntas');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
