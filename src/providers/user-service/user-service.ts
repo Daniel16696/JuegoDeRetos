@@ -19,7 +19,7 @@ export class UserServiceProvider {
   postDatos(nicknameUsuario) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { nickname: nicknameUsuario, victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0' }
+      let datos = { nickname: nicknameUsuario, victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0', conectado:'0', idUsuarioContrincante:'0' }
       console.log(datos);
       console.log(JSON.stringify(datos));
       var url = 'http://localhost:8080/Slim/nuevoUsuario';
@@ -44,6 +44,14 @@ export class UserServiceProvider {
     }
   }
 
+  getUsuarioDelMovilUsandoPorId(id) {
+    try {
+      return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcreto/' + id);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   getUsuarioDelMovilUsando(nickname) {
     try {
@@ -102,10 +110,10 @@ export class UserServiceProvider {
     }
   }
 
-  cambiarNicknameDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje) {
+  cambiarNicknameDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje }
+      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
       console.log(datos);
 
       console.log(JSON.stringify(datos));
@@ -129,4 +137,92 @@ export class UserServiceProvider {
       console.log(error);
     }
   }
+
+  cambiarElEstadoDeConectadoDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
+      console.log(datos);
+
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/cambiarElEstadoDeConectado/' + id;
+      return new Promise(resolve => {
+        this.http.put(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // ponerUsuarioADesconectado(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
+  //   try {
+  //     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  //     let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
+  //     console.log(datos);
+
+  //     console.log(JSON.stringify(datos));
+  //     var url = 'http://localhost:8080/Slim/ponerADesconectado/' + id;
+  //     return new Promise(resolve => {
+  //       this.http.put(url, JSON.stringify(datos), httpOptions)
+  //         .subscribe(data => {
+  //           resolve(data);
+  //           console.log(data);
+  //         });
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // ponerUsuarioAEnPartida(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
+  //   try {
+  //     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  //     let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
+  //     console.log(datos);
+
+  //     console.log(JSON.stringify(datos));
+  //     var url = 'http://localhost:8080/Slim/ponerAEnPartida/' + id;
+  //     return new Promise(resolve => {
+  //       this.http.put(url, JSON.stringify(datos), httpOptions)
+  //         .subscribe(data => {
+  //           resolve(data);
+  //           console.log(data);
+  //         });
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  buscarUsuarioDisponibleParaJugar(id) {
+    try {
+      return this.http.get('http://localhost:8080/Slim/buscarUsuarioParaJugar/' + id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  nuevaPartidaEnComun(idUsuarioAplicacion,idUsuarioContricante) {
+    try {
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      let datos = { idUsuarioAplicacion: idUsuarioAplicacion, idUsuarioContricante: idUsuarioContricante, marcadorUsuarioAplicacion: '0', marcadorUsuarioContricante: '0', victoriaOderrotaUsuarioAplicacion: '', victoriaOderrotaUsuarioContricante: '' }
+      console.log(datos);
+      console.log(JSON.stringify(datos));
+      var url = 'http://localhost:8080/Slim/nuevaPartidaEnComunDeUsuariosJugando';
+      return new Promise(resolve => {
+        this.http.post(url, JSON.stringify(datos), httpOptions)
+          .subscribe(data => {
+            resolve(data);
+            console.log(data);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  
 }

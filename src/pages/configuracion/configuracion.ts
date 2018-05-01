@@ -184,7 +184,9 @@ export class ConfiguracionPage {
                             data.nickname,
                             this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
                             this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-                            this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje
+                            this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
+                            this.usuarioEnConcretoDeLaAplicacion[0].conectado,
+                            this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante
                           );
 
                           window.localStorage['nickUsuarioAplicacion'] = data.nickname;

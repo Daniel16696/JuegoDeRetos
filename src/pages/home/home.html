@@ -8,10 +8,20 @@
   <button ion-button full color=StyleAzulPropio>
     <ion-icon ios="ios-add" md="md-add" (click)="jugarOnline();"> Partida Online</ion-icon>
   </button>
-  <button ion-button full color=StyleAzulPropio>
+
+
+
+
+  <div id="contenedor" [ngStyle]="{'display': cargando }">
+    <!-- <div>Buscando partida :{{contadorDeBuscadorAtras}}</div> -->
+    <div class="loader" id="loader">Loading...</div>
+  </div>
+
+
+  <!-- <button ion-button full color=StyleAzulPropio>
     <ion-icon ios="ios-add" md="md-add"> Partida Offline</ion-icon>
-  </button>
-  <div style="height:190px;"></div>
+  </button> -->
+  <!-- <div style="height:220px;"></div> -->
   <!-- Empieza la seccion de las ultimas partidas -->
   <ion-icon ios="ios-remove-circle" md="md-remove-circle" style="font-size:25px;"> Finalizadas</ion-icon>
   <!-- Lista de las tres últimas partidas para mostrarle al usuario -->

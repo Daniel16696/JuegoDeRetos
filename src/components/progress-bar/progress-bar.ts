@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { RondasPage } from '../../pages/rondas/rondas';
 
 
 @Component({
@@ -11,7 +13,7 @@ export class ProgressBarComponent {
   @Input('progress') progress;
   public intervalo2;
 
-  public constructor() {
+  public constructor(public navCtrl: NavController) {
   }
 
   ngOnInit() {
@@ -20,22 +22,23 @@ export class ProgressBarComponent {
       if (this.loadProgressTime <= 60) {
         this.loadProgressTime -= 1;
         // this.loadProgress -= 1.667;
-        console.log(this.loadProgressTime);
+        // console.log(this.loadProgressTime);
         // console.log(this.loadProgress);
       }
       if (this.loadProgress <= 100) {
         this.loadProgress -= 1.667;
-        console.log(this.loadProgress);
+        // console.log(this.loadProgress);
       }
 
       if (this.loadProgress == 3.313999999999922) {
         this.loadProgress = 1.667;
-        console.log("lo he puesto a 0"+this.loadProgress);
+        // console.log("lo he puesto a 0"+this.loadProgress);
       }
 
       if (this.loadProgressTime <= 0) {
         alert("se ha terminado");
         clearInterval(this.intervalo2);
+        this.navCtrl.push(RondasPage);
         // clearInterval(this.loadProgress);
       }
     }, 1000);

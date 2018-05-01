@@ -2,6 +2,8 @@ page-inicio-del-juego {
     font-family: "Raleway";
     font-weight: bolder;
     ion-content{
-        background-color: #e6e5e5 !important;
+        background-image: url("/assets/imgs/fondo-inicio.png");
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 }
