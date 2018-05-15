@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color=StyleNaranjaPropio>
+    <ion-title text-center>
+      Cambiar imagen
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="listaImagenes">
+    <ion-item *ngFor="let item of imagenesDisponiblesParaElUsuario; let i = index">
+      <ion-thumbnail item-start>
+        <img src="/assets/imgs/{{item.nombreDeLaFoto}}.png">
+      </ion-thumbnail>
+      <!-- <h2>My Neighbor Totoro</h2>
+      <p>Hayao Miyazaki • 1988</p> -->
+      <button ion-button clear item-end (click)="EscogerImagen(item.nombreDeLaFoto)">Elegir</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -4,18 +4,20 @@ page-jugar-online {
     ion-content{
         background-color: #e6e5e5 !important;
     }
-    .borderTituloPregunta{
-        border:2px solid #747474;
-    }
-    .borderRespuestaAPregunta{
-        border:1px solid #747474;
-        border-top: 0px;
-    }
-    .iconoAceptaroFallar{
-    }
 
     .item-md {
        padding-left: 0px !important; 
     }
-
+    .borderTituloPregunta{
+        border:2px solid #747474;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .borderRespuestaAPregunta{
+        border:1px solid #747474;
+        font-size: 18px;
+    }
+    .tabbar {
+        display:none;
+    }
 }

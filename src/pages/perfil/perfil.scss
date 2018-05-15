@@ -1,7 +1,47 @@
-page-contact {
+page-perfil {
     font-family: "Raleway" !important;
     font-weight: bolder  !important;
-    ion-content{
-        background-color: #e6e5e5 !important;
+
+    .titulo_resultados{
+        color: #fff;
+        font-size: 0.5em;
+        font-family: "Codec";
+    }
+    .titulo_clasificacion{
+        color: #fff;
+        font-size: 0.5em;
+        font-family: "Codec";
+    }
+    .contenedor_clasificacion{
+        margin-bottom: 20px;
+    }
+    .icono{
+        color: #fff;
+        font-size: 34px;
+    }
+    .boton_fondo{
+        background-color: #BA7EA5;
+    }
+    .botones_Infomacion{
+        font-family: "Typography";
+        color: #fff;
+        font-weight: 600;
+    }
+    .tamaño_numero {
+        font-family: "Typography";
+        font-size: 18px;
+    }
+    .titulo_ranking_general{
+        font-size: 20px;
+        color: #333;
+        font-weight: 700;
+        text-align: left;
+        font-family: "Typography";
+        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+    
+    }
+    .contenedor_ranking{
+        height: 70px;
     }
 }

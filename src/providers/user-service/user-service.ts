@@ -9,7 +9,7 @@ export class UserServiceProvider {
   }
   getUsers() {
     try {
-      return this.http.get('http://localhost:8080/Slim/obtenerUsuarios');
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerUsuarios');
     } catch (error) {
       console.log(error);
     }
@@ -19,10 +19,10 @@ export class UserServiceProvider {
   postDatos(nicknameUsuario) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { nickname: nicknameUsuario, victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0', conectado:'0', idUsuarioContrincante:'0' }
+      let datos = { nickname: nicknameUsuario, imagenAsociada: 'imagen0', victoriasRondas: '0', derrotasRondas: '0', victoriaPorcentaje: '0', sala:'0', ocupado:'0', IdAsignacionDePregunta:'0',contadorTemporalDeAciertos:'0', respuestasDelUsuarioTemporal: '', IconosDeRespuestasDelUsuarioTemporal: '' }
       console.log(datos);
       console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/nuevoUsuario';
+      var url = 'http://192.168.18.16:8080/Slim/nuevoUsuario';
       return new Promise(resolve => {
         this.http.post(url, JSON.stringify(datos), httpOptions)
           .subscribe(data => {
@@ -38,7 +38,7 @@ export class UserServiceProvider {
 
   getUsuariosRanking() {
     try {
-      return this.http.get('http://localhost:8080/Slim/obtenerTodosUsuariosRanking');
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerTodosUsuariosRanking');
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,7 @@ export class UserServiceProvider {
 
   getUsuarioDelMovilUsandoPorId(id) {
     try {
-      return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcreto/' + id);
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerUsuariosEnConcreto/' + id);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +55,7 @@ export class UserServiceProvider {
 
   getUsuarioDelMovilUsando(nickname) {
     try {
-      return this.http.get('http://localhost:8080/Slim/obtenerUsuariosEnConcretoPorNickName/' + nickname);
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerUsuariosEnConcretoPorNickName/' + nickname);
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +64,7 @@ export class UserServiceProvider {
 
   borrarUsuarioConfiguracion(id) {
     try {
-      return this.http.delete('http://localhost:8080/Slim/borrarUsuarioConfiguracion/' + id);
+      return this.http.delete('http://192.168.18.16:8080/Slim/borrarUsuarioConfiguracion/' + id);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +77,7 @@ export class UserServiceProvider {
       console.log(datos);
 
       console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/enviarEmailSugerencias';
+      var url = 'http://192.168.18.16:8080/Slim/enviarEmailSugerencias';
       return new Promise(resolve => {
         this.http.post(url, JSON.stringify(datos), httpOptions)
           .subscribe(data => {
@@ -97,7 +97,7 @@ export class UserServiceProvider {
       console.log(datos);
 
       console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/enviarEmailContactanos';
+      var url = 'http://192.168.18.16:8080/Slim/enviarEmailContactanos';
       return new Promise(resolve => {
         this.http.post(url, JSON.stringify(datos), httpOptions)
           .subscribe(data => {
@@ -110,14 +110,14 @@ export class UserServiceProvider {
     }
   }
 
-  cambiarNicknameDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
+  cambiarNicknameDelUsuario(id, nickname, imagenAsociada, victoriasRondas, derrotasRondas, victoriaPorcentaje, sala, ocupado, IdAsignacionDePregunta, contadorTemporalDeAciertos, respuestasDelUsuarioTemporal, IconosDeRespuestasDelUsuarioTemporal) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
+      let datos = { nickname: nickname, imagenAsociada: imagenAsociada, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, sala: sala, ocupado: ocupado, IdAsignacionDePregunta: IdAsignacionDePregunta, contadorTemporalDeAciertos: contadorTemporalDeAciertos, respuestasDelUsuarioTemporal: respuestasDelUsuarioTemporal, IconosDeRespuestasDelUsuarioTemporal: IconosDeRespuestasDelUsuarioTemporal }
       console.log(datos);
 
       console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/cambiarNicknameDelUsuario/' + id;
+      var url = 'http://192.168.18.16:8080/Slim/cambiarNicknameDelUsuario/' + id;
       return new Promise(resolve => {
         this.http.put(url, JSON.stringify(datos), httpOptions)
           .subscribe(data => {
@@ -130,22 +130,30 @@ export class UserServiceProvider {
     }
   }
 
-  getTresPreguntas() {
+  getPreguntaAsignada(idSala) {
     try {
-      return this.http.get('http://localhost:8080/Slim/obtenerLasTresPreguntas');
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerLaPreguntaAsignada/' + idSala);
     } catch (error) {
       console.log(error);
     }
   }
 
-  cambiarElEstadoDeConectadoDelUsuario(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
+  obtenerLaPreguntaDefinitiva(idPregunta) {
+    try {
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerLaPreguntaDefinitiva/' + idPregunta);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  cambiarElEstadoDeConectadoDelUsuario(id, nickname, imagenAsociada, victoriasRondas, derrotasRondas, victoriaPorcentaje, sala, ocupado, IdAsignacionDePregunta, contadorTemporalDeAciertos, respuestasDelUsuarioTemporal, IconosDeRespuestasDelUsuarioTemporal) {
     try {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
+      let datos = { nickname: nickname, imagenAsociada: imagenAsociada, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, sala: sala, ocupado: ocupado, IdAsignacionDePregunta:IdAsignacionDePregunta, contadorTemporalDeAciertos: contadorTemporalDeAciertos, respuestasDelUsuarioTemporal: respuestasDelUsuarioTemporal, IconosDeRespuestasDelUsuarioTemporal: IconosDeRespuestasDelUsuarioTemporal }
       console.log(datos);
 
       console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/cambiarElEstadoDeConectado/' + id;
+      var url = 'http://192.168.18.16:8080/Slim/cambiarElEstadoDeConectado/' + id;
       return new Promise(resolve => {
         this.http.put(url, JSON.stringify(datos), httpOptions)
           .subscribe(data => {
@@ -158,71 +166,54 @@ export class UserServiceProvider {
     }
   }
 
-  // ponerUsuarioADesconectado(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
-  //   try {
-  //     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  //     let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
-  //     console.log(datos);
-
-  //     console.log(JSON.stringify(datos));
-  //     var url = 'http://localhost:8080/Slim/ponerADesconectado/' + id;
-  //     return new Promise(resolve => {
-  //       this.http.put(url, JSON.stringify(datos), httpOptions)
-  //         .subscribe(data => {
-  //           resolve(data);
-  //           console.log(data);
-  //         });
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // ponerUsuarioAEnPartida(id, nickname, victoriasRondas, derrotasRondas, victoriaPorcentaje, conectado, idUsuarioContrincante) {
-  //   try {
-  //     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  //     let datos = { nickname: nickname, victoriasRondas: victoriasRondas, derrotasRondas: derrotasRondas, victoriaPorcentaje: victoriaPorcentaje, conectado: conectado, idUsuarioContrincante: idUsuarioContrincante }
-  //     console.log(datos);
-
-  //     console.log(JSON.stringify(datos));
-  //     var url = 'http://localhost:8080/Slim/ponerAEnPartida/' + id;
-  //     return new Promise(resolve => {
-  //       this.http.put(url, JSON.stringify(datos), httpOptions)
-  //         .subscribe(data => {
-  //           resolve(data);
-  //           console.log(data);
-  //         });
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
   buscarUsuarioDisponibleParaJugar(id) {
     try {
-      return this.http.get('http://localhost:8080/Slim/buscarUsuarioParaJugar/' + id);
+      return this.http.get('http://192.168.18.16:8080/Slim/buscarUsuarioParaJugar/' + id);
     } catch (error) {
       console.log(error);
     }
   }
 
-  nuevaPartidaEnComun(idUsuarioAplicacion,idUsuarioContricante) {
+  buscandoTeniendoContrincanteYa(id) {
     try {
-      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      let datos = { idUsuarioAplicacion: idUsuarioAplicacion, idUsuarioContricante: idUsuarioContricante, marcadorUsuarioAplicacion: '0', marcadorUsuarioContricante: '0', victoriaOderrotaUsuarioAplicacion: '', victoriaOderrotaUsuarioContricante: '' }
-      console.log(datos);
-      console.log(JSON.stringify(datos));
-      var url = 'http://localhost:8080/Slim/nuevaPartidaEnComunDeUsuariosJugando';
-      return new Promise(resolve => {
-        this.http.post(url, JSON.stringify(datos), httpOptions)
-          .subscribe(data => {
-            resolve(data);
-            console.log(data);
-          });
-      });
+      return this.http.get('http://192.168.18.16:8080/Slim/buscarTeniendoContrincanteYa/' + id);
     } catch (error) {
       console.log(error);
     }
-
   }
+
+  buscarSalaNoOcupada(id) {
+    try {
+      return this.http.get('http://192.168.18.16:8080/Slim/buscarSalaNoOcupada/' + id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  esperarAsalaCompleta(idSala) {
+    try {
+      return this.http.get('http://192.168.18.16:8080/Slim/esperarAsalaCompleta/'+ idSala);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  relevarRespuestasDeLaPreguntaJugada(idPregunta) {
+    try {
+      return this.http.get('http://192.168.18.16:8080/Slim/relevarRespuestasDeLaPreguntaJugada/'+ idPregunta);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  obtenerImagenes() {
+    try {
+      return this.http.get('http://192.168.18.16:8080/Slim/obtenerImagenes');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   
 }

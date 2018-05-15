@@ -1,13 +1,11 @@
 <ion-header>
   <ion-navbar color=StyleNaranjaPropio>
-    <ion-title text-center>¿QUIERES RETARME?</ion-title>
+    <ion-title text-center>GANAR O PERDER</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button full color=StyleAzulPropio>
-    <ion-icon ios="ios-add" md="md-add" (click)="jugarOnline();"> Partida Online</ion-icon>
-  </button>
+
 
 
 
@@ -17,48 +15,62 @@
     <div class="loader" id="loader">Loading...</div>
   </div>
 
-
-  <!-- <button ion-button full color=StyleAzulPropio>
-    <ion-icon ios="ios-add" md="md-add"> Partida Offline</ion-icon>
-  </button> -->
   <!-- <div style="height:220px;"></div> -->
+
   <!-- Empieza la seccion de las ultimas partidas -->
-  <ion-icon ios="ios-remove-circle" md="md-remove-circle" style="font-size:25px;"> Finalizadas</ion-icon>
+  <div class="contenedor_finalizadas">
+    <ion-icon ios="ios-remove-circle" md="md-remove-circle" style="font-size:25px;" class="icono">
+      <span class="texto_de_partidas_finalizadas">Finalizadas</span>
+    </ion-icon>
+  </div>
   <!-- Lista de las tres últimas partidas para mostrarle al usuario -->
   <ion-list>
     <!-- Primer item -->
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/icono-imagen.jpg">
+        <img src="assets/imgs/imagen0.png">
       </ion-avatar>
-      <h2>Nombre de Usuario</h2>
-      <p>DERROTA: Perdiste 0 - 3</p>
+      <h2 class="texto_custom">Nombre de Usuario</h2>
+      <p class="texto_custom">DERROTA: Perdiste 0 - 3</p>
       <button ion-button clear item-end>
-        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon>
+        <!-- <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon> -->
       </button>
     </ion-item>
     <!-- Segundo item -->
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/icono-imagen.jpg">
+        <img src="assets/imgs/imagen0.png">
       </ion-avatar>
-      <h2>Nombre de Usuario</h2>
-      <p>VICTORIA: Ganaste 2 - 1</p>
+      <h2 class="texto_custom">Nombre de Usuario</h2>
+      <p class="texto_custom">VICTORIA: Ganaste 2 - 1</p>
       <button ion-button clear item-end>
-        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon>
+        <!-- <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon> -->
       </button>
     </ion-item>
     <!-- Tercer item -->
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/icono-imagen.jpg">
+        <img src="assets/imgs/imagen0.png">
       </ion-avatar>
-      <h2>Nombre de Usuario</h2>
-      <p>VICTORIA: Ganaste 3 - 0</p>
+      <h2 class="texto_custom">Nombre de Usuario</h2>
+      <p class="texto_custom">VICTORIA: Ganaste 3 - 0</p>
       <button ion-button clear item-end>
-        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon>
+        <!-- <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" style="font-size:55px;" color=StyleAzulPropio></ion-icon> -->
       </button>
     </ion-item>
   </ion-list>
   <!-- Termina la seccion de las ultimas partidas -->
+
+  <div>
+    <button ion-button full class="principales_botones" [ngStyle]="{'display': invisibleElBotonDeJugar }" (click)="jugarOnline();">
+      <span class="botones_Infomacion"> Jugar</span>
+    </button>
+    <!-- <ion-icon ios="ios-add" md="md-add" (click)="jugarOnline();" class="icono"></ion-icon> -->
+  </div>
+  <div>
+    <button ion-button full class="principales_botones" [ngStyle]="{'display': invisibleElBotonDeCancelar }" (click)="cancelarOnline();">
+      <span class="botones_Infomacion"> Cancelar Partida</span>
+    </button>
+    <!-- <ion-icon ios="ios-add" md="md-add" (click)="cancelarOnline();" class="icono"></ion-icon> -->
+  </div>
 </ion-content>

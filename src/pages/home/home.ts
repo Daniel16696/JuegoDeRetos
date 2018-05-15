@@ -8,184 +8,253 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public intervaloTiempo;
+  static intervaloTiempo: any;
   cargando: any;
   usuarioEnConcretoDeLaAplicacion: any;
-  usuarioOponente: any;
+  usuarioEnConcretoDeLaAplicacion2: any;
+  static instancia: any;
+  static noEjecutarParte2: any;
 
-  contadorDeBuscadorAtras: any;
+  salaNoOcupada: any;
+  esperandoSalaParaRellenar: any;
+  clickado: number = 0;
+  noEjecutarParte2: number = 0;
 
+  numeroRandom: any;
 
-
+  invisibleElBotonDeCancelar: any;
+  invisibleElBotonDeJugar:any;
+  
   constructor(public navCtrl: NavController, public userService: UserServiceProvider, public alertCtrl: AlertController) {
+    this.invisibleElBotonDeCancelar = 'none';
+    this.invisibleElBotonDeJugar = 'block';
     this.cargando = "none";
+    this.clickado = 0;
+    HomePage.instancia = this;
+    HomePage.noEjecutarParte2 = 0;
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
 
-  // Jugador en 0: Desconectado y no disponible para jugar
-  // Jugador en 1: Conectado y disponible para jugar
-  // Jugador en 2: Conectado y pero no disponible para jugar
-  jugarOnline() {
-    this.contadorDeBuscadorAtras = 15;
-    this.cargando = "block";
+  getNumeroRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  cancelarOnline() {
+    this.invisibleElBotonDeCancelar = 'none';
+    this.invisibleElBotonDeJugar = 'block';
+    this.cargando = "none";
+    HomePage.noEjecutarParte2 = 0;
+    this.clickado = 0;
+    clearInterval(HomePage.intervaloTiempo);
 
+    this.userService.getUsuarioDelMovilUsando(localStorage.getItem('nickUsuarioAplicacion'))
+      .subscribe(
+        (data5) => { // Success
+          this.usuarioEnConcretoDeLaAplicacion = data5;
+
+          this.userService.cambiarElEstadoDeConectadoDelUsuario(
+            this.usuarioEnConcretoDeLaAplicacion[0].id,
+            this.usuarioEnConcretoDeLaAplicacion[0].nickname,
+            this.usuarioEnConcretoDeLaAplicacion[0].imagenAsociada,            
+            this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
+            this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
+            this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
+            0,
+            0,
+            0,
+            0,
+            '',
+            ''
+          );
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+  }
+  parte1() {
+    HomePage.noEjecutarParte2 = 0;
+    this.clickado = 0;
+    console.log("Estoy dentro de clickado a 0 y clickado está en: " + this.clickado);
 
     this.userService.getUsuarioDelMovilUsando(localStorage.getItem('nickUsuarioAplicacion'))
       .subscribe(
         (data) => { // Success
           this.usuarioEnConcretoDeLaAplicacion = data;
-          console.log(this.usuarioEnConcretoDeLaAplicacion[0].id);
+          console.log("ESTE ES EL USUARIO DE LA APLICACION " + this.usuarioEnConcretoDeLaAplicacion[0].nickname);
 
-          this.userService.cambiarElEstadoDeConectadoDelUsuario(
-            this.usuarioEnConcretoDeLaAplicacion[0].id,
-            this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-            this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-            this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-            this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-            1,
-            this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante
-          );
+          this.userService.buscarSalaNoOcupada(this.usuarioEnConcretoDeLaAplicacion[0].id)
+            .subscribe(
+              (data2) => { // Success
+
+                this.salaNoOcupada = data2;
+                console.log("La sala no ocupada del ususario es: " + this.salaNoOcupada[0].sala);
+                if (this.salaNoOcupada.length == 1) {
+                  console.log(this.salaNoOcupada);
+                  console.log(this.salaNoOcupada.length);
+                  HomePage.noEjecutarParte2 = 1;
+                  //sala no ocupada que se le va a asignar al usuario para posteriormente mandarlos a partida
+                  console.log(this.salaNoOcupada[0].sala);
+
+                  this.userService.cambiarElEstadoDeConectadoDelUsuario(
+                    this.usuarioEnConcretoDeLaAplicacion[0].id,
+                    this.usuarioEnConcretoDeLaAplicacion[0].nickname,
+                    this.usuarioEnConcretoDeLaAplicacion[0].imagenAsociada,
+                    this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
+                    this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
+                    this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
+                    this.salaNoOcupada[0].sala,
+                    1,
+                    this.usuarioEnConcretoDeLaAplicacion[0].IdAsignacionDePregunta,
+                    this.usuarioEnConcretoDeLaAplicacion[0].contadorTemporalDeAciertos,
+                    this.usuarioEnConcretoDeLaAplicacion[0].respuestasDelUsuarioTemporal,
+                    this.usuarioEnConcretoDeLaAplicacion[0].IconosDeRespuestasDelUsuarioTemporal
+                  );
 
 
+                  console.log("He enviado a los jugadores a la partida 1");
+                  this.cargando = "none";
+                  this.invisibleElBotonDeCancelar = 'none';
+                  this.invisibleElBotonDeJugar = 'block';
+                  // this.clickado = 0;
+                  this.navCtrl.push(JugarOnlinePage, {
+                    IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion[0].id,
+                    IDUsuarioContrincante: this.salaNoOcupada[0].id,
+                    IdSalaAsignadaEnConjunto: this.salaNoOcupada[0].sala
+                  });
 
-          this.intervaloTiempo = setInterval(() => {
-
-            if (this.contadorDeBuscadorAtras <= 15) {
-              this.contadorDeBuscadorAtras -= 1;
-              console.log(this.contadorDeBuscadorAtras);
-
-              this.userService.buscarUsuarioDisponibleParaJugar(this.usuarioEnConcretoDeLaAplicacion[0].id)
-              .subscribe(
-                (data2) => { // Success
-                  this.usuarioOponente = data2;
-                  console.log("EL OPONENTE ES: " + this.usuarioOponente[0].nickname);
-  
-                  if (this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante == this.usuarioOponente[0].id ||
-                    this.usuarioOponente[0].idUsuarioContrincante == this.usuarioEnConcretoDeLaAplicacion[0].id) {
-  
-                      this.cargando = "none";
-                      this.contadorDeBuscadorAtras = 0;
-                      clearInterval(this.intervaloTiempo);
-    
-                      console.log("He encontrado un Contrincante, te lanzo a la pantalla de juego");
-                      console.log("Vas a jugar contra " + this.usuarioOponente[0].nickname);
-    
-                      this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                        this.usuarioEnConcretoDeLaAplicacion[0].id,
-                        this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-                        this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-                        this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-                        this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-                        2,
-                        this.usuarioOponente[0].id
-                      );
-    
-                      this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                        this.usuarioOponente[0].id,
-                        this.usuarioOponente[0].nickname,
-                        this.usuarioOponente[0].victoriasRondas,
-                        this.usuarioOponente[0].derrotasRondas,
-                        this.usuarioOponente[0].victoriaPorcentaje,
-                        2,
-                        this.usuarioEnConcretoDeLaAplicacion[0].id
-                      );
-    
-                      this.navCtrl.push(JugarOnlinePage, {
-                        IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion[0].id,
-                        IDUsuarioContrincante: this.usuarioOponente[0].id
-                      });
-                  }
-  
-                  if (this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante == 0 && this.usuarioOponente[0].idUsuarioContrincante == 0) {
-  
-                    this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                      this.usuarioEnConcretoDeLaAplicacion[0].id,
-                      this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-                      this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-                      this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-                      this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-                      this.usuarioEnConcretoDeLaAplicacion[0].conectado,
-                      this.usuarioOponente[0].id
-                    );
-  
-                    this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                      this.usuarioOponente[0].id,
-                      this.usuarioOponente[0].nickname,
-                      this.usuarioOponente[0].victoriasRondas,
-                      this.usuarioOponente[0].derrotasRondas,
-                      this.usuarioOponente[0].victoriaPorcentaje,
-                      this.usuarioOponente[0].conectado,
-                      this.usuarioEnConcretoDeLaAplicacion[0].id
-                    );
-                  }
-  
-                  if (this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante == this.usuarioOponente[0].id
-                    && this.usuarioOponente[0].idUsuarioContrincante == this.usuarioEnConcretoDeLaAplicacion[0].id) {
-  
-                    this.cargando = "none";
-                    this.contadorDeBuscadorAtras = 0;
-                    clearInterval(this.intervaloTiempo);
-  
-                    console.log("He encontrado un Contrincante, te lanzo a la pantalla de juego");
-                    console.log("Vas a jugar contra " + this.usuarioOponente[0].nickname);
-  
-                    this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                      this.usuarioEnConcretoDeLaAplicacion[0].id,
-                      this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-                      this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-                      this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-                      this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-                      2,
-                      this.usuarioOponente[0].id
-                    );
-  
-                    this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                      this.usuarioOponente[0].id,
-                      this.usuarioOponente[0].nickname,
-                      this.usuarioOponente[0].victoriasRondas,
-                      this.usuarioOponente[0].derrotasRondas,
-                      this.usuarioOponente[0].victoriaPorcentaje,
-                      2,
-                      this.usuarioEnConcretoDeLaAplicacion[0].id
-                    );
-  
-                    this.navCtrl.push(JugarOnlinePage, {
-                      IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion[0].id,
-                      IDUsuarioContrincante: this.usuarioOponente[0].id
-                    });
-  
-                  }
-  
-                },
-                (error) => {
-                  console.error(error);
-                  console.log("No se ha podido encontrar ningún usuario conectado");
                 }
-              )
+
+              },
+              (error) => {
+                // console.error(error);
+                // this.numeroRandom = this.getNumeroRandom(1, 1000000);
+
+                // console.log(this.numeroRandom);
+
+                this.userService.cambiarElEstadoDeConectadoDelUsuario(
+                  this.usuarioEnConcretoDeLaAplicacion[0].id,
+                  this.usuarioEnConcretoDeLaAplicacion[0].nickname,
+                  this.usuarioEnConcretoDeLaAplicacion[0].imagenAsociada,
+                  this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
+                  this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
+                  this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
+                  this.usuarioEnConcretoDeLaAplicacion[0].id,
+                  this.usuarioEnConcretoDeLaAplicacion[0].ocupado,
+                  this.usuarioEnConcretoDeLaAplicacion[0].IdAsignacionDePregunta,
+                  this.usuarioEnConcretoDeLaAplicacion[0].contadorTemporalDeAciertos,
+                  this.usuarioEnConcretoDeLaAplicacion[0].respuestasDelUsuarioTemporal,
+                  this.usuarioEnConcretoDeLaAplicacion[0].IconosDeRespuestasDelUsuarioTemporal
+                );
+
+                // this.clickado = 1;
+                console.log("Esperando a que otro usuario se una a la partida");
+              }
+            )
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+  }
 
 
 
-            }
+  jugarOnline() {
+    this.invisibleElBotonDeJugar = 'none';
+    this.invisibleElBotonDeCancelar = 'block';
+    this.cargando = "block";
+    this.clickado = 0;
 
-            if (this.contadorDeBuscadorAtras <= 0) {
-              this.cargando = "none";
-              alert("se ha terminado");
-              this.userService.cambiarElEstadoDeConectadoDelUsuario(
-                this.usuarioEnConcretoDeLaAplicacion[0].id,
-                this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-                this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-                this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-                this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-                0,
-                this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante
-              );
-              clearInterval(this.intervaloTiempo);
-            }
+    console.log("He entrado al jugar online y clickado está en: " + this.clickado);
+    if (this.clickado == 0) {
+      console.log("He entrado a clickado 0 y el clickado está en:  " + this.clickado);
+      this.parte1();
 
-          }, 1000);
+      HomePage.intervaloTiempo = setInterval(function () { HomePage.instancia.parte2(); }, 500);
 
+    }
+    //termina el clickado = 0
+    // else if (this.clickado == 1) {
+    //   console.log("He entrado a clickado 1 y el clickado está en:  " + this.clickado);
+    //   this.parte2();
+    // }
+    //termina el clickado = 1
+
+  }
+
+
+  parte2() {
+    console.log("Estoy dentro de clickado a 1");
+    this.userService.getUsuarioDelMovilUsando(localStorage.getItem('nickUsuarioAplicacion'))
+      .subscribe(
+        (data3) => { // Success
+          this.usuarioEnConcretoDeLaAplicacion2 = data3;
+
+          this.userService.esperarAsalaCompleta(this.usuarioEnConcretoDeLaAplicacion2[0].sala)
+            .subscribe(
+              (data4) => { // Success
+
+                this.esperandoSalaParaRellenar = data4;
+                if (HomePage.noEjecutarParte2 == 1) {
+                  clearInterval(HomePage.intervaloTiempo);
+                }
+                if (this.esperandoSalaParaRellenar.length == 2 && HomePage.noEjecutarParte2 == 0) {
+
+                  clearInterval(HomePage.intervaloTiempo);
+
+                  console.log(this.esperandoSalaParaRellenar);
+                  console.log(this.esperandoSalaParaRellenar.length);
+                  console.log("He enviado a los jugadores a la partida 2");
+
+                  this.userService.cambiarElEstadoDeConectadoDelUsuario(
+                    this.usuarioEnConcretoDeLaAplicacion2[0].id,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].nickname,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].imagenAsociada,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].victoriasRondas,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].derrotasRondas,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].victoriaPorcentaje,
+                    this.esperandoSalaParaRellenar[0].sala,
+                    1,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].IdAsignacionDePregunta,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].contadorTemporalDeAciertos,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].respuestasDelUsuarioTemporal,
+                    this.usuarioEnConcretoDeLaAplicacion2[0].IconosDeRespuestasDelUsuarioTemporal
+                  );
+
+                  if (this.usuarioEnConcretoDeLaAplicacion2[0].id == this.esperandoSalaParaRellenar[0].id) {
+                    this.cargando = "none";
+                    this.invisibleElBotonDeCancelar = 'none';
+                    this.invisibleElBotonDeJugar = 'block';
+                    this.clickado = 0;
+                    this.navCtrl.push(JugarOnlinePage, {
+                      IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion2[0].id,
+                      IDUsuarioContrincante: this.esperandoSalaParaRellenar[1].id,
+                      IdSalaAsignadaEnConjunto: this.esperandoSalaParaRellenar[0].sala
+                    });
+                  } else {
+                    this.cargando = "none";
+                    this.invisibleElBotonDeCancelar = 'none';
+                    this.invisibleElBotonDeJugar = 'block';
+                    this.clickado = 0;
+                    this.navCtrl.push(JugarOnlinePage, {
+                      IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion2[0].id,
+                      IDUsuarioContrincante: this.esperandoSalaParaRellenar[0].id,
+                      IdSalaAsignadaEnConjunto: this.esperandoSalaParaRellenar[0].sala
+                    });
+                  }
+
+
+                } else if (this.esperandoSalaParaRellenar.length != 2) {
+                  console.log("Aún no se ha llenado la sala");
+                }
+
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
 
 
         },
@@ -193,100 +262,9 @@ export class HomePage {
           console.error(error);
         }
       )
+
   }
+
+
 }
-
-
-    // this.userService.buscarUsuarioDisponibleParaJugar(this.usuarioEnConcretoDeLaAplicacion[0].id)
-    //   .subscribe(
-    //     (data2) => { // Success
-    //       this.usuarioOponente = data2;
-    //       console.log(this.usuarioOponente);
-
-    //       if (this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante == 0 ) {
-
-    //         this.userService.ponerUsuarioAConectado(
-    //           this.usuarioEnConcretoDeLaAplicacion[0].id,
-    //           this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-    //           this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-    //           this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-    //           this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-    //           1,
-    //           this.usuarioOponente[0].id
-    //         );
-
-    //         this.userService.ponerUsuarioAConectado(
-    //           this.usuarioOponente[0].id,
-    //           this.usuarioOponente[0].nickname,
-    //           this.usuarioOponente[0].victoriasRondas,
-    //           this.usuarioOponente[0].derrotasRondas,
-    //           this.usuarioOponente[0].victoriaPorcentaje,
-    //           1,
-    //           this.usuarioEnConcretoDeLaAplicacion[0].id
-    //         );
-
-    //         if (this.usuarioOponente[0].idUsuarioContrincante == this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante ) {
-    //           console.log("He encontrado un Contrincante, te lanzo a la pantalla de juego");
-    //           console.log("Vas a jugar contra " + this.usuarioOponente[0].nickname);
-
-    //           this.userService.ponerUsuarioAConectado(
-    //             this.usuarioEnConcretoDeLaAplicacion[0].id,
-    //             this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-    //             this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-    //             this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-    //             this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-    //             2,
-    //             this.usuarioOponente[0].id
-    //           );
-
-    //           this.userService.ponerUsuarioAConectado(
-    //             this.usuarioOponente[0].id,
-    //             this.usuarioOponente[0].nickname,
-    //             this.usuarioOponente[0].victoriasRondas,
-    //             this.usuarioOponente[0].derrotasRondas,
-    //             this.usuarioOponente[0].victoriaPorcentaje,
-    //             2,
-    //             this.usuarioEnConcretoDeLaAplicacion[0].id
-    //           );
-
-    //           this.navCtrl.push(JugarOnlinePage, {
-    //             IDusuarioEnConcretoDeLaAplicacion: this.usuarioEnConcretoDeLaAplicacion[0].id,
-    //             IDUsuarioContrincante: this.usuarioOponente[0].id
-    //           });
-
-
-    //         }
-
-    //       }
-
-
-    //     },
-    //     (error) => {
-    //       console.error(error);
-    //       console.log("No se ha podido encontrar ningún usuario conectado");
-    //     }
-    //   )
-
-
-    // this.userService.ponerUsuarioADesconectado(
-    //   this.usuarioEnConcretoDeLaAplicacion[0].id,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-    //   0,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante
-    // );
-
-    // this.userService.ponerUsuarioAEnPartida(
-    //   this.usuarioEnConcretoDeLaAplicacion[0].id,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].nickname,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
-    //   2,
-    //   this.usuarioEnConcretoDeLaAplicacion[0].idUsuarioContrincante
-    // );
-
-
 

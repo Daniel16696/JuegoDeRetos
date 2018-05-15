@@ -1,14 +1,42 @@
 page-home {
-    font-family: "Raleway" !important;
-    ion-content{
-        background-color: #e6e5e5 !important;
+
+    .principales_botones{
+    border-radius: 14px 14px 14px 14px;
+    -moz-border-radius: 14px 14px 14px 14px;
+    -webkit-border-radius: 14px 14px 14px 14px;
+    // border: 2px solid #BA7EA5;
+    background-color: #BA7EA5;
+    padding: 30px;
+    margin-bottom: 20px;
+    }
+    .botones_Infomacion{
+      font-size: 30px;
+    }
+    .texto_custom{
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #420039;
+      font-family: "Typography";
+      margin-bottom: 5px !important;
+      margin-top: 5px !important;
+    }
+    p .texto_custom{
+      margin-bottom: 10px !important;
+      margin-top: 10px !important;
+    }
+    .icono{
+      font-size: 30px;
+      color: #fff;
+      margin-top: 15px;
+    }
+    .contenedor_finalizadas{
+      margin-bottom: 15px;
+    }
+    .texto_de_partidas_finalizadas{
+      color: #fff;
+      font-family: "Codec";
     }
     
-    // Titulo de la aplicacion
-    .toolbar-title-md{
-        font-size: 3rem !important;
-    }
-
     
 .loader:before,
 .loader:after,
@@ -22,7 +50,8 @@ page-home {
   animation: load7 1.8s infinite ease-in-out;
 }
 .loader {
-  margin: 8em auto;
+  margin: 0 auto;
+  margin-bottom: 50px;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
@@ -47,20 +76,20 @@ page-home {
   0%,
   80%,
   100% {
-    box-shadow: 0 2.5em 0 -1.3em #eb8510;
+    box-shadow: 0 2.5em 0 -1.3em #E67F0D;
   }
   40% {
-    box-shadow: 0 2.5em 0 0 #eb8510;
+    box-shadow: 0 2.5em 0 0 #E67F0D;
   }
 }
 @keyframes load7 {
   0%,
   80%,
   100% {
-    box-shadow: 0 2.5em 0 -1.3em #eb8510;
+    box-shadow: 0 2.5em 0 -1.3em #E67F0D;
   }
   40% {
-    box-shadow: 0 2.5em 0 0 #eb8510;
+    box-shadow: 0 2.5em 0 0 #E67F0D;
   }
 }
 }

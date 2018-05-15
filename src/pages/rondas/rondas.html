@@ -5,92 +5,88 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title text-center>Ronda 1</ion-title>
+  <ion-navbar color=StyleNaranjaPropio>
+    <ion-title text-center>
+      Resultado Final
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <ion-grid padding>
+  <ion-grid>
 
     <ion-row class="borderRespuestaAPregunta">
-      <ion-col col-3>
+      <ion-col col-4>
         <ion-avatar item-start>
-          <img src="assets/imgs/icono-imagen.jpg">
+          <p class="nombresDeLosUsuarios">{{NombreDelUsuario1}}</p>
+          <div class="contenedorDeLaImagen">
+            <img src="/assets/imgs/{{ImagenDelUsuario1}}.png">
+          </div>
         </ion-avatar>
       </ion-col>
-      <ion-col col-6 text-center>
-        1 - 0
+      <ion-col col-4 text-center class="totalDeResultado">
+        <p>
+          <span class="contadorDeRepuestasAcertadas">{{ResultadoDelUsuario1}}</span>
+          <span class="palabraTOTAL"> TOTAL </span>
+          <span class="contadorDeRepuestasAcertadas">{{ResultadoDelUsuario2}}</span>
+        </p>
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-4>
         <ion-avatar item-start>
-          <img src="assets/imgs/icono-imagen.jpg">
+          <p class="nombresDeLosUsuarios">{{NombreDelUsuario2}}</p>
+          <div class="contenedorDeLaImagen">
+            <img src="/assets/imgs/{{ImagenDelUsuario2}}.png">
+          </div>
         </ion-avatar>
       </ion-col>
     </ion-row>
 
   </ion-grid>
 
-  <ion-grid padding>
-    <ion-row class="borderTituloPregunta">
-      <ion-col col-12 text-center>
-        Escribe todos los animales que empiezen por la letra "p"
-      </ion-col>
-    </ion-row>
+  <h2 class="laPreguntaDada">{{LapreguntaQueSeHaJugadoEs}}</h2>
 
-    <ion-row class="borderRespuestaAPregunta">
-      <ion-col col-2>
-      </ion-col>
-      <ion-col col-4 text-left>
-        Usuario 1
-      </ion-col>
-      <ion-col col-4 text-right>
-        Usuario 2
-      </ion-col>
-      <ion-col col-2>
-      </ion-col>
-    </ion-row>
-    <ion-row class="borderRespuestaAPregunta">
-      <ion-col col-2>
-      </ion-col>
-      <ion-col col-4 text-left>
-        Respuesta
-      </ion-col>
-      <ion-col col-4 text-right>
-        Respuesta
-      </ion-col>
-      <ion-col col-2>
-      </ion-col>
-    </ion-row>
-    <ion-row class="borderRespuestaAPregunta">
-      <ion-col col-2>
-      </ion-col>
-      <ion-col col-4 text-left>
-        Respuesta
-      </ion-col>
-      <ion-col col-4 text-right>
-        Respuesta
-      </ion-col>
-      <ion-col col-2>
-      </ion-col>
-    </ion-row>
-    <ion-row class="borderRespuestaAPregunta">
+  <div class="contenidoCompleto">
 
-      <ion-col col-12 text-center>
-        4 TOTAL 3
-      </ion-col>
+    <div class="ContenidoDeLasListasDeRespuestas">
 
-    </ion-row>
-    <ion-row class="borderRespuestaAPregunta">
+      <h3 class="tituloJugadorContrincante">Respuestas de {{NombreDelUsuario2}}</h3>
+      <div class="contenidoDeLasListas">
+        <ul class="jugadorContrincante">
+          <li class="liOcultadoParaFormatearloMejor">OOOOOOOOOOOOOOOOOOOOOOOOOOOO</li>
+          <li *ngFor="let item3 of ARRAYRespuestasEscritasDelUsuario2; let x = index">{{item3}}</li>
+        </ul>
+        <ul class="IconosjugadorContrincante">
+          <li class="liOcultadoParaFormatearloMejor">
+            <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+          </li>
+          <li *ngFor="let item4 of ARRAYIconosDeRespuestasEscritasDelUsuario2; let z = index">
+            <ion-icon ios="ios-{{item4}}" md="md-{{item4}}"></ion-icon>
+          </li>
+        </ul>
+      </div>
 
-      <ion-col col-12 text-center>
-        <button>REVELAR RESPUESTAS</button>
-      </ion-col>
+      <h3 class="tituloJugadorDeLaAplicacion">Respuestas de {{NombreDelUsuario1}}</h3>
+      <div class="contenidoDeLasListas">
+        <ul class="jugadorDeLaAplicacion">
+          <li class="liOcultadoParaFormatearloMejor">OOOOOOOOOOOOOOOOOOOOOOOOOOOO</li>
+          <li *ngFor="let item of ARRAYRespuestasEscritasDelUsuario1; let i = index">{{item}}</li>
+        </ul>
+        <ul class="IconosjugadorDeLaAplicacion">
+          <li class="liOcultadoParaFormatearloMejor">
+            <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+          </li>
+          <li *ngFor="let item2 of ARRAYIconosDeRespuestasEscritasDelUsuario1; let j = index">
+            <ion-icon ios="ios-{{item2}}" md="md-{{item2}}"></ion-icon>
+          </li>
+        </ul>
+      </div>
 
-    </ion-row>
-  </ion-grid>
+    </div>
+
+    <div text-center>
+      <button class="botonRevelarRespuestas" (click)='revelarRespuestas();'>REVELAR RESPUESTAS</button>
+    </div>
+  </div>
 
 </ion-content>

@@ -15,7 +15,107 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+// @font-face {
+//     font-family: "Raleway";
+//     src: url("../assets/fonts/Raleway-Medium.ttf") format('truetype');
+// }
 @font-face {
-    font-family: "Raleway";
-    src: url("../assets/fonts/Raleway-Medium.ttf") format('truetype');
+    font-family: "HeroesLegend";
+    src: url("../assets/fonts/Heroes Legend.ttf") format('truetype');
+}
+@font-face {
+    font-family: "Codec";
+    src: url("../assets/fonts/Codec-Warm-Light-trial.ttf") format('truetype');
+}
+@font-face {
+    font-family: "Typography";
+    src: url("../assets/fonts/Typography Times Regular.ttf") format('truetype');
+}
+
+
+.toolbar-title-md{
+    font-size: 1.3em !important;
+    font-family: "HeroesLegend";
+}
+.toolbar-title-md{
+    padding-top: 10px;
+}
+ion-refresher-content{
+    -webkit-filter: drop-shadow(0px 3px 3px #fff);
+}
+.has-refresher > .scroll-content {
+    border-top: 0px solid #ddd; 
+}
+.content-md{
+        // background-color: #420039 !important;
+        background: rgba(66,0,57,1);
+        background: -moz-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(66,0,57,1)), color-stop(100%, rgba(184,123,177,1)));
+        background: -webkit-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+        background: -o-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+        background: -ms-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+        background: linear-gradient(to bottom, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#420039', endColorstr='#b87bb1', GradientType=0 );
+}
+.alert-md .alert-wrapper {
+    border-radius: 2px;
+    max-width: 280px;
+    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    background: rgba(66,0,57,1);
+    background: -moz-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(66,0,57,1)), color-stop(100%, rgba(184,123,177,1)));
+    background: -webkit-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+    background: -o-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+    background: -ms-linear-gradient(top, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+    background: linear-gradient(to bottom, rgba(66,0,57,1) 0%, rgba(184,123,177,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#420039', endColorstr='#b87bb1', GradientType=0 );
+}
+.alert-md .alert-head {
+    text-align: center;
+    font-family: "Codec";
+    color: #fff;
+}
+.alert-md .alert-title {
+    font-size: 23px;
+}
+.alert-md .alert-message {
+    text-align: center;
+    font-family: "Typography";
+    color: #fff;
+    font-size: 16px;
+}
+.alert-md .alert-input {
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    font-family: "Typography";
+    font-size: 1.2em;
+}
+.alert-md .alert-input:focus {
+    border-bottom: 2px solid #fff;
+}
+.alert-md .alert-button-group {
+    font-family: "HeroesLegend";
+    color: #fff;
+}
+.alert-md .alert-button {
+    color: #fff;
+}
+.item-md {
+    background-color: #FFC857 !important;
+}
+
+.ion-navbar{
+    background-color: #E67F0D !important;   
+}
+.item-md.item-block .item-inner{
+    border-bottom: 0px solid #dedede; 
+}
+.button-md.activated{
+    background-color: #53A2BE;
+}
+
+.item-md ion-avatar ion-img, .item-md ion-avatar img {
+    width: 60px;
+    height: 60px;
 }

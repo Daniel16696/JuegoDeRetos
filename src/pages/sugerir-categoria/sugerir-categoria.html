@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color=StyleNaranjaPropio>
     <ion-title text-center>
-      SUGERIR CATEGORIA
+      SUGERENCIA
     </ion-title>
   </ion-navbar>
 
@@ -20,10 +20,10 @@
   <form [formGroup]="formularioSugerirCategoria" (ngSubmit)="guardarConsultaDeSugerirCategoria()">
     <ion-list>
 
-      <p text-justify>Introduce el nombre de una categoria que te gustaria que incluyeramos en nuestra aplicación y una breve descripción
-        de esa categoria</p>
+      <p text-justify class="texto_introductorio">Introduce el nombre de una categoria que te gustaria que incluyeramos en nuestra aplicación y una breve descripción
+        de esa categoria.</p>
       <ion-item>
-        <ion-textarea cols="45" rows="6" formControlName="comentario" placeholder="Introduce la categoria que te interesaría que apareciera"></ion-textarea>
+        <ion-textarea cols="45" rows="6" formControlName="comentario" placeholder="Escribe la que te gustaría que aparezca"></ion-textarea>
       </ion-item>
 
       <!-- <p text-justify>Descripción de cómo te gustaría que esa categoria se implementase en nuestra aplicación</p>
@@ -33,7 +33,7 @@
 
     </ion-list>
     <div padding>
-      <button ion-button block type="submit" [disabled]="!formularioSugerirCategoria.valid">Enviar</button>
+      <button class="boton_enviar" ion-button block type="submit" [disabled]="!formularioSugerirCategoria.valid">Enviar</button>
     </div>
   </form>
 </ion-content>

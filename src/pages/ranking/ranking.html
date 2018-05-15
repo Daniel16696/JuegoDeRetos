@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color=StyleNaranjaPropio>
     <ion-title text-center>
-      CLASIFICATORIA
+      CLASIFICACIÓN
     </ion-title>
   </ion-navbar>
 
@@ -25,13 +25,13 @@
 
     <ion-item *ngFor="let item of usuariosRanking; let i = index">
       <ion-avatar item-start>
-        <div>{{i+1}}</div>
-        <img src="assets/imgs/icono-imagen.jpg">
+        <div class="numeroDelRanking">{{i+1}}</div>
+        <img src="assets/imgs/{{item.imagenAsociada}}.png">
       </ion-avatar>
-      <h2>{{item.nickname}}</h2>
-      <div clear item-end>
-        <p>Ganadas</p>
-        <p text-center>{{item.victoriasRondas}}</p>
+      <h2 class="nombreDelUsuario">{{item.nickname}}</h2>
+      <div clear item-end class="contenedorDeGanadas">
+        <p class="texto_ganadas">Ganadas</p>
+        <p text-center class="numero_victorias">{{item.victoriasRondas}}</p>
       </div>
     </ion-item>
 

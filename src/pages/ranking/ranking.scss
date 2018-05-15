@@ -1,7 +1,28 @@
 page-ranking {
     font-family: "Raleway";
     font-weight: bolder;
-    ion-content{
-        background-color: #e6e5e5 !important;
+    .nombreDelUsuario{
+        font-size: 1.2em;
+        font-family: "Typography";
+        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+    }
+    .numeroDelRanking{
+        font-size: 1.2em;
+        font-family: "Typography";
+    }
+    // .contenedorDeGanadas{
+    //     font-size: 1.2em;
+    // }
+    .texto_ganadas{
+        font-size: 1em;
+        color: #333;
+        font-family: "Typography";
+    }
+
+    .numero_victorias{
+        font-size: 1em;
+        color: #333;
+        font-family: "Typography";
     }
 }

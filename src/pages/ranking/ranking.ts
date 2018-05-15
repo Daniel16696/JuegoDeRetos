@@ -10,7 +10,22 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 export class RankingPage {
   usuariosRanking: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {
-    
+
+    this.userService.getUsuariosRanking()
+      .subscribe(
+        (data) => { // Success
+          this.usuariosRanking = data;
+          console.log(this.usuariosRanking);
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+
+  }
+
+  ionViewDidEnter() {
+
     this.userService.getUsuariosRanking()
       .subscribe(
         (data) => { // Success

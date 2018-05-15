@@ -25,6 +25,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { JugarOnlinePage } from '../pages/jugar-online/jugar-online';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { RondasPage } from '../pages/rondas/rondas';
+import { ElegirImagenPage } from '../pages/elegir-imagen/elegir-imagen';
 
 
 
@@ -42,7 +43,8 @@ import { RondasPage } from '../pages/rondas/rondas';
     InicioDelJuegoPage,
     JugarOnlinePage,
     ProgressBarComponent,
-    RondasPage
+    RondasPage,
+    ElegirImagenPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { RondasPage } from '../pages/rondas/rondas';
     ContactanosPage,
     InicioDelJuegoPage,
     JugarOnlinePage,
-    RondasPage
+    RondasPage,
+    ElegirImagenPage
   ],
   providers: [
     StatusBar,
