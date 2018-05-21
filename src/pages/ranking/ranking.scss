@@ -1,28 +1,26 @@
 page-ranking {
-    font-family: "Raleway";
-    font-weight: bolder;
     .nombreDelUsuario{
-        font-size: 1.2em;
-        font-family: "Typography";
+        font-size: 1.4em;
+        font-family: "Rokkitt";
         margin-bottom: 10px !important;
         margin-top: 10px !important;
     }
     .numeroDelRanking{
-        font-size: 1.2em;
-        font-family: "Typography";
+        font-size: 1.5em;
+        font-family: "Rokkitt";
     }
     // .contenedorDeGanadas{
     //     font-size: 1.2em;
     // }
     .texto_ganadas{
-        font-size: 1em;
+        font-size: 1.1em;
         color: #333;
-        font-family: "Typography";
+        font-family: "Rokkitt";
     }
 
     .numero_victorias{
-        font-size: 1em;
+        font-size: 1.1em;
         color: #333;
-        font-family: "Typography";
+        font-family: "Rokkitt";
     }
 }

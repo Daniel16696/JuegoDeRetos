@@ -46,7 +46,7 @@ export class JugarOnlinePage {
   // public IDusuarioEnConcretoDeLaAplicacion: any;
   // public IDUsuarioContrincante: any;7
 
-
+  comprobacionDePalabra: any;
 
   IDusuarioEnConcretoDeLaAplicacion: any;
   IDUsuarioContrincante: any;
@@ -149,50 +149,47 @@ export class JugarOnlinePage {
     this.arrayRespuestasCortadas = this.MostrarLaRespuesta.split(",");
     //console.log(this.arrayRespuestasCortadas);
 
-
     //valor del usuario introducido poniendolo todo en minusculas y sin acentos
     this.palabraDeUsuarioSinTilde = this.quitaAcentos(this.formularioEnviarRespuestas.value.respuesta.toLowerCase());
     //console.log(this.palabraDeUsuarioSinTilde);
 
     //recorro el array que me devuelve anteriormente y ahora recorriendolo las convierto en minusculas todas las mayusculas que se encuentra
     for (let i = 0; i < this.arrayRespuestasCortadas.length; i++) {
-      //valor sin quitarle la mayuscula
-      //console.log(this.arrayRespuestasCortadas[i]);
-      //valor ya poniendolo todo en minusculas
-      this.arrayRespuestasCortadas[i].toLowerCase();
-      // console.log(this.arrayRespuestasCortadas[i].toLowerCase());
-      //valor ya poniendolo todo en minusculas y sin acentos
+
       this.palabraDEFINITIVASinTilde = this.quitaAcentos(this.arrayRespuestasCortadas[i].toLowerCase());
       console.log(this.palabraDEFINITIVASinTilde);
 
       for (let i = 0; i < this.arrayRespuestasUsuario.length; i++) {
         // console.log(this.arrayRespuestasUsuario[i].respuesta);
-        if (this.arrayRespuestasUsuario[i].respuesta == this.formularioEnviarRespuestas.value.respuesta) {
+
+        if (this.arrayRespuestasUsuario[i].respuesta == this.palabraDeUsuarioSinTilde) {
           console.log("He salido del for y son iguales");
           this.controladorDeRepeticion = 1;
-        } else if (this.arrayRespuestasUsuario[i].respuesta != this.formularioEnviarRespuestas.value.respuesta) {
+          break;
+        } else if (this.arrayRespuestasUsuario[i].respuesta != this.palabraDeUsuarioSinTilde) {
           console.log("He salido del else if y NO son iguales");
-
           this.controladorDeRepeticion = 0;
         }
 
       }
 
       if (this.palabraDEFINITIVASinTilde == this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 0) {
+        this.formularioEnviarRespuestas.value.respuesta = this.palabraDeUsuarioSinTilde;
         this.formularioEnviarRespuestas.value.icono = "checkmark-circle";
         this.contadorPalabrasAcertadas += 1;
         // console.log("Llevas acertadas " + this.contadorPalabrasAcertadas + " palabra/s");
         // console.log("Has acertado la palabra");
         break;
       } else if (this.palabraDEFINITIVASinTilde != this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 0) {
+        this.formularioEnviarRespuestas.value.respuesta = this.palabraDeUsuarioSinTilde;
         this.formularioEnviarRespuestas.value.icono = "close-circle";
         // console.log("Has fallado la palabra");
-
-      } else if (this.palabraDEFINITIVASinTilde == this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1 ||
-        this.palabraDEFINITIVASinTilde != this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1) {
+      } else if (this.palabraDEFINITIVASinTilde == this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1
+        || this.palabraDEFINITIVASinTilde != this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1) {
+        this.controladorDeRepeticion = 0;
+        this.formularioEnviarRespuestas.value.respuesta = this.palabraDeUsuarioSinTilde;
         this.formularioEnviarRespuestas.value.icono = "information-circle";
         console.log("Se ha repetido la palabra, losiento no contará en la puntuacion");
-
       }
 
 
@@ -324,3 +321,136 @@ export class JugarOnlinePage {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// guardarFormularioEnviarRespuestas() {
+//   console.log(this.formularioEnviarRespuestas.value);
+//   console.log(this.formularioEnviarRespuestas.value.respuesta);
+//   console.log(this.formularioEnviarRespuestas.value.icono);
+
+//   //rescato las respuestas y las formateo quitandole todas las comas
+//   this.arrayRespuestasCortadas = this.MostrarLaRespuesta.split(",");
+//   //console.log(this.arrayRespuestasCortadas);
+
+
+//   //valor del usuario introducido poniendolo todo en minusculas y sin acentos
+//   this.palabraDeUsuarioSinTilde = this.quitaAcentos(this.formularioEnviarRespuestas.value.respuesta.toLowerCase());
+//   //console.log(this.palabraDeUsuarioSinTilde);
+
+//   //recorro el array que me devuelve anteriormente y ahora recorriendolo las convierto en minusculas todas las mayusculas que se encuentra
+//   for (let i = 0; i < this.arrayRespuestasCortadas.length; i++) {
+//     //valor sin quitarle la mayuscula
+//     //console.log(this.arrayRespuestasCortadas[i]);
+//     //valor ya poniendolo todo en minusculas
+//     this.arrayRespuestasCortadas[i].toLowerCase();
+//     // console.log(this.arrayRespuestasCortadas[i].toLowerCase());
+//     //valor ya poniendolo todo en minusculas y sin acentos
+//     this.palabraDEFINITIVASinTilde = this.quitaAcentos(this.arrayRespuestasCortadas[i].toLowerCase());
+//     console.log(this.palabraDEFINITIVASinTilde);
+
+//     for (let i = 0; i < this.arrayRespuestasUsuario.length; i++) {
+//       // console.log(this.arrayRespuestasUsuario[i].respuesta);
+//       if (this.arrayRespuestasUsuario[i].respuesta == this.formularioEnviarRespuestas.value.respuesta) {
+//         console.log("He salido del for y son iguales");
+//         this.controladorDeRepeticion = 1;
+//       } else if (this.arrayRespuestasUsuario[i].respuesta != this.formularioEnviarRespuestas.value.respuesta) {
+//         console.log("He salido del else if y NO son iguales");
+
+//         this.controladorDeRepeticion = 0;
+//       }
+
+//     }
+
+//     if (this.palabraDEFINITIVASinTilde == this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 0) {
+//       this.formularioEnviarRespuestas.value.icono = "checkmark-circle";
+//       this.contadorPalabrasAcertadas += 1;
+//       // console.log("Llevas acertadas " + this.contadorPalabrasAcertadas + " palabra/s");
+//       // console.log("Has acertado la palabra");
+//       break;
+//     } else if (this.palabraDEFINITIVASinTilde != this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 0) {
+//       this.formularioEnviarRespuestas.value.icono = "close-circle";
+//       // console.log("Has fallado la palabra");
+
+//     } else if (this.palabraDEFINITIVASinTilde == this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1 ||
+//       this.palabraDEFINITIVASinTilde != this.palabraDeUsuarioSinTilde && this.controladorDeRepeticion == 1) {
+//       this.formularioEnviarRespuestas.value.icono = "information-circle";
+//       console.log("Se ha repetido la palabra, losiento no contará en la puntuacion");
+
+//     }
+
+
+//   }
+
+//   this.arrayRespuestasUsuario.push(this.formularioEnviarRespuestas.value);
+
+//   // console.log(this.arrayRespuestasUsuario);
+
+//   this.formularioEnviarRespuestas = this.crearFormularioEnviarRespuesta();
+//   // this.arrayRespuestasUsuario.forEach(function (value) {
+//   //   console.log(value);
+//   // });
+
+//   // for (this.i = 0; i < arrayRespuestasUsuario.length; i++) {
+//   //   console.log(arrayRespuestasUsuario[i]);
+//   // }
+// }
+
+
+
+// guardarFormularioEnviarRespuestas() {
+//   // console.log(this.formularioEnviarRespuestas.value);
+//   // console.log(this.formularioEnviarRespuestas.value.respuesta);
+//   // console.log(this.formularioEnviarRespuestas.value.icono);
+
+//   //valor del usuario introducido poniendolo todo en minusculas y sin acentos
+//   // console.log('La ID de la pregunta es: '+this.IDMostrarLaPregunta);
+
+//   this.palabraDeUsuarioSinTilde = this.quitaAcentos(this.formularioEnviarRespuestas.value.respuesta.toLowerCase());
+
+//   // console.log(this.palabraDeUsuarioSinTilde);
+
+
+
+//   this.userService.comprobarPalabraIntroducida(this.IDMostrarLaPregunta, this.palabraDeUsuarioSinTilde)
+//     .subscribe(
+//       (data20) => { // Success
+//         this.comprobacionDePalabra = data20;
+//         console.log(this.comprobacionDePalabra);
+//         let controlador = 0;
+
+//         if (this.comprobacionDePalabra == "0") {
+//           this.formularioEnviarRespuestas.value.icono = "close-circle";
+
+//         } else if(this.comprobacionDePalabra == this.palabraDeUsuarioSinTilde){
+//           this.formularioEnviarRespuestas.value.icono = "checkmark-circle";
+//           this.contadorPalabrasAcertadas += 1;
+//           console.log("Llevas acertadas " + this.contadorPalabrasAcertadas + " palabra/s");
+//         }
+
+//         this.arrayRespuestasUsuario.push(this.formularioEnviarRespuestas.value);
+//         console.log(this.arrayRespuestasUsuario);
+
+//         this.formularioEnviarRespuestas = this.crearFormularioEnviarRespuesta();
+
+//       },
+//       (error) => {
+//         console.error(error);
+//       }
+//     )
+
+// }

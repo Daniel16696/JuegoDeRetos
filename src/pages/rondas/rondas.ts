@@ -42,7 +42,7 @@ export class RondasPage {
 
   public ImagenDelUsuario1: any;
   public ImagenDelUsuario2: any;
-  
+
 
   public ResultadoDelUsuario1: any;
   public ResultadoDelUsuario2: any;
@@ -58,6 +58,16 @@ export class RondasPage {
   public PorcentajeDeVictoriaDelUsuario1: any;
   public PorcentajeDeVictoriaDelUsuario2: any;
 
+  public now: any;
+  public year: any;
+  public month: any;
+  public day: any;
+  public hour: any;
+  public minute: any;
+  public second: any;
+
+  public fechaActualDeHoy: any;
+  public FORMATEADALAfechaActualDeHoy: any;
   public ARRAYRespuestasEscritasDelUsuario1 = [];
   public ARRAYRespuestasEscritasDelUsuario2 = [];
 
@@ -69,6 +79,10 @@ export class RondasPage {
 
   public IconosDeRespuestasEscritasDelUsuario1: any = '';
   public IconosDeRespuestasEscritasDelUsuario2: any = '';
+
+
+  public arraygeneral = [];
+  public arraygeneralOtro = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public userService: UserServiceProvider, public alertCtrl: AlertController) {
     this.IDusuarioEnConcretoDeLaAplicacion = navParams.get('IDusuarioEnConcretoDeLaAplicacion');
@@ -87,8 +101,8 @@ export class RondasPage {
   revelarRespuestas() {
     console.log('la pregunta asignada fue' + this.IdDeLaPreguntaJugada);
     console.log("entro a la funcion");
-    this.preguntaRevelarRespuesta='';
-    this.messageRevelarRespuesta='';
+    this.preguntaRevelarRespuesta = '';
+    this.messageRevelarRespuesta = '';
     this.userService.relevarRespuestasDeLaPreguntaJugada(this.IdDeLaPreguntaJugada)
       .subscribe(
         (data3) => { // Success         
@@ -145,10 +159,24 @@ export class RondasPage {
           this.IconosDeRespuestasEscritasDelUsuario1 = this.usuarioEnConcretoDeLaAplicacion[0].IconosDeRespuestasDelUsuarioTemporal;
 
           this.ARRAYRespuestasEscritasDelUsuario1 = this.RespuestasEscritasDelUsuario1.split(",");
-          console.log(this.ARRAYRespuestasEscritasDelUsuario1);
+          // console.log(this.ARRAYRespuestasEscritasDelUsuario1);
 
           this.ARRAYIconosDeRespuestasEscritasDelUsuario1 = this.IconosDeRespuestasEscritasDelUsuario1.split(",");
-          console.log(this.ARRAYIconosDeRespuestasEscritasDelUsuario1);
+          // console.log(this.ARRAYIconosDeRespuestasEscritasDelUsuario1);
+
+
+          console.log("AQUI ESTOY TESTEANDO 1");
+          for (let i = 0; i < this.ARRAYRespuestasEscritasDelUsuario1.length; i++) {
+            
+            for (let j = 0; j < this.ARRAYIconosDeRespuestasEscritasDelUsuario1.length; j++) {
+
+              var objeto = { respuesta: this.ARRAYRespuestasEscritasDelUsuario1[i], icono: this.ARRAYIconosDeRespuestasEscritasDelUsuario1[i] };
+
+            }
+            this.arraygeneral.push(objeto);
+          }
+          console.log(this.arraygeneral);
+
 
 
 
@@ -173,8 +201,60 @@ export class RondasPage {
                 console.log(this.ARRAYIconosDeRespuestasEscritasDelUsuario2);
 
 
+                console.log("AQUI ESTOY TESTEANDO 2");
+                for (let z = 0; z < this.ARRAYRespuestasEscritasDelUsuario2.length; z++) {
+
+                  for (let x = 0; x < this.ARRAYIconosDeRespuestasEscritasDelUsuario2.length; x++) {
+
+                    var objetoOtro = { respuestaOtro: this.ARRAYRespuestasEscritasDelUsuario2[z], iconoOtro: this.ARRAYIconosDeRespuestasEscritasDelUsuario2[z] };
+
+                  }
+                  this.arraygeneralOtro.push(objetoOtro);
+                }
+                console.log(this.arraygeneralOtro);
+
+
                 RondasPage.intervaloTiempo2 = setTimeout(function () {
                   //PARA SACAR AL GANADOR Y SUMARLE UNA VICTORIA DE RONDA
+                  RondasPage.instancia.fechaActualDeHoy = new Date();
+                  // RondasPage.instancia.FORMATEADALAfechaActualDeHoy = RondasPage.instancia.fechaActualDeHoy.getDate() + '/' + (RondasPage.instancia.fechaActualDeHoy.getMonth() + 1) + '/' + RondasPage.instancia.fechaActualDeHoy.getFullYear();
+                  RondasPage.instancia.FORMATEADALAfechaActualDeHoy = RondasPage.instancia.js_yyyy_mm_dd_hh_mm_ss();
+
+                  // console.log("ANTES DE EJECUTAR REGISTRAR PARTIDA 1");
+                  // console.log("IdUsuarioAplicacion:" + RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].id);
+                  // console.log("IdUsuarioContrincante:" + RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].id);
+                  // console.log("NICKNAMEUsuarioContrincante:" + RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].nickname);
+                  // console.log("IMAGEN asociada de UsuarioContrincante:" + RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].imagenAsociada);
+                  // console.log("Estado de la Partida:" + 'VICTORIA');
+                  // console.log("Estado de la Partida:" + 'Ganaste');
+                  // console.log("Contador De Respuestas UsuarioAplicacion:" + RondasPage.instancia.ResultadoDelUsuario1);
+                  // console.log("Contador De Respuestas Usuario CONTRINCANTE:" + RondasPage.instancia.ResultadoDelUsuario2);
+                  // console.log("rescatar la fecha actual:" + RondasPage.instancia.FORMATEADALAfechaActualDeHoy);
+
+                  if (RondasPage.instancia.ResultadoDelUsuario1 > RondasPage.instancia.ResultadoDelUsuario2) {
+                    RondasPage.instancia.userService.registrarPartida(
+                      RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].id,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].id,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].nickname,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].imagenAsociada,
+                      'VICTORIA',
+                      'Ganaste',
+                      RondasPage.instancia.ResultadoDelUsuario1,
+                      RondasPage.instancia.ResultadoDelUsuario2,
+                      RondasPage.instancia.FORMATEADALAfechaActualDeHoy);
+                  } else if (RondasPage.instancia.ResultadoDelUsuario1 < RondasPage.instancia.ResultadoDelUsuario2) {
+                    RondasPage.instancia.userService.registrarPartida(
+                      RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].id,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].id,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].nickname,
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].imagenAsociada,
+                      'DERROTA',
+                      'Perdiste',
+                      RondasPage.instancia.ResultadoDelUsuario1,
+                      RondasPage.instancia.ResultadoDelUsuario2,
+                      RondasPage.instancia.FORMATEADALAfechaActualDeHoy);
+                  }
+
                   if (RondasPage.instancia.ResultadoDelUsuario1 > RondasPage.instancia.ResultadoDelUsuario2) {
 
 
@@ -188,7 +268,6 @@ export class RondasPage {
                     RondasPage.instancia.DerrotasDelUsuario2 = parseInt(RondasPage.instancia.DerrotasDelUsuario2) + 1;
 
                     RondasPage.instancia.PorcentajeDeVictoriaDelUsuario2 = (100 / (parseInt(RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].victoriasRondas) + parseInt(RondasPage.instancia.DerrotasDelUsuario2))) * parseInt(RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].victoriasRondas);
-
 
                     RondasPage.instancia.userService.cambiarElEstadoDeConectadoDelUsuario(
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].id,
@@ -219,12 +298,13 @@ export class RondasPage {
                       '',
                       ''
                     );
+
                   } else if (RondasPage.instancia.ResultadoDelUsuario1 == RondasPage.instancia.ResultadoDelUsuario2) {
 
                     RondasPage.instancia.userService.cambiarElEstadoDeConectadoDelUsuario(
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].id,
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].nickname,
-                      RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].imagenAsociada,                      
+                      RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].imagenAsociada,
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].victoriasRondas,
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].derrotasRondas,
                       RondasPage.instancia.usuarioEnConcretoDeLaAplicacion[0].victoriaPorcentaje,
@@ -239,7 +319,7 @@ export class RondasPage {
                     RondasPage.instancia.userService.cambiarElEstadoDeConectadoDelUsuario(
                       RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].id,
                       RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].nickname,
-                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].imagenAsociada,                      
+                      RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].imagenAsociada,
                       RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].victoriasRondas,
                       RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].derrotasRondas,
                       RondasPage.instancia.usuarioContrincanteDeLaAplicacion[0].victoriaPorcentaje,
@@ -275,6 +355,16 @@ export class RondasPage {
     console.log('ionViewDidLoad RondasPage');
   }
 
+  js_yyyy_mm_dd_hh_mm_ss() {
+    this.now = new Date();
+    this.year = "" + this.now.getFullYear();
+    this.month = "" + (this.now.getMonth() + 1); if (this.month.length == 1) { this.month = "0" + this.month; }
+    this.day = "" + this.now.getDate(); if (this.day.length == 1) { this.day = "0" + this.day; }
+    this.hour = "" + this.now.getHours(); if (this.hour.length == 1) { this.hour = "0" + this.hour; }
+    this.minute = "" + this.now.getMinutes(); if (this.minute.length == 1) { this.minute = "0" + this.minute; }
+    this.second = "" + this.now.getSeconds(); if (this.second.length == 1) { this.second = "0" + this.second; }
+    return this.year + "-" + this.month + "-" + this.day + " " + this.hour + ":" + this.minute + ":" + this.second;
+  }
 
 
 }

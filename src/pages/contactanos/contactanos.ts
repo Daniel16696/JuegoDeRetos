@@ -36,6 +36,7 @@ export class ContactanosPage {
         subTitle: '¡Gracias por contactar con nosotros!',
         buttons: ['Ok']
       });
+      this.navCtrl.pop();
       alert.present();
       this.formularioContactanos = this.crearFormularioDeContactanos();
     } catch (error) {

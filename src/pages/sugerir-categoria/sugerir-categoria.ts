@@ -30,6 +30,7 @@ export class SugerirCategoriaPage {
         subTitle: '¡Gracias por colaborar!',
         buttons: ['Ok']
       });
+      this.navCtrl.pop();
       alert.present();
       this.formularioSugerirCategoria = this.crearFormularioDeSugerirCategoria();
     } catch (error) {

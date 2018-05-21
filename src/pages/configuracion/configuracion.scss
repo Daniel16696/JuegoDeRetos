@@ -1,16 +1,18 @@
 page-configuracion {
     .titulo_opciones {
-        font-family: "Codec";
+       font-family: "Rokkitt";
         font-weight: 700;
         font-size: 1.4em;
         color: #333;
+        letter-spacing: 2px;
     }
     .titulo_contacto {
-        font-family: "Codec";
+       font-family: "Rokkitt";
         margin-top: 10px !important;
         font-weight: 700;
         font-size: 1.4em;
         color: #333;
+        letter-spacing: 2px;
     }
     .list-header-md {
         margin-bottom: 2px;
@@ -23,7 +25,8 @@ page-configuracion {
         font-size: 1.2em;
         font-weight: 500;
         color: #420039;
-        font-family: "Typography";
+        font-family: "Rokkitt";
+        letter-spacing: 2px;
     }
     ion-alert .alert-wrapper{
         background: rgba(66,0,57,1);

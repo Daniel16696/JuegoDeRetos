@@ -24,8 +24,8 @@
     src: url("../assets/fonts/Heroes Legend.ttf") format('truetype');
 }
 @font-face {
-    font-family: "Codec";
-    src: url("../assets/fonts/Codec-Warm-Light-trial.ttf") format('truetype');
+    font-family: "Rokkitt";
+    src: url("../assets/fonts/Rokkitt-Medium.ttf") format('truetype');
 }
 @font-face {
     font-family: "Typography";
@@ -73,7 +73,7 @@ ion-refresher-content{
 }
 .alert-md .alert-head {
     text-align: center;
-    font-family: "Codec";
+    font-family: "Rokkitt";
     color: #fff;
 }
 .alert-md .alert-title {
@@ -81,15 +81,32 @@ ion-refresher-content{
 }
 .alert-md .alert-message {
     text-align: center;
-    font-family: "Typography";
+    font-family: "Rokkitt";
+    color: #fff;
+    font-size: 20px;
+}
+.alert-md .alert-message ul{
+    text-align: center;
+    font-family: "Rokkitt";
     color: #fff;
     font-size: 16px;
+    list-style: none;
+    padding: 0px;
+    margin-top: 0px;
 }
+.alert-md .alert-message li{
+    font-size: 1.25em !important;
+    font-family: "Rokkitt";
+}
+
 .alert-md .alert-input {
     border-bottom: 1px solid #fff;
     text-align: center;
-    font-family: "Typography";
-    font-size: 1.2em;
+    font-family: "Rokkitt";
+    font-size: 17px;
+}
+.alert-md .alert-sub-title {
+    font-size: 20px;
 }
 .alert-md .alert-input:focus {
     border-bottom: 2px solid #fff;
@@ -105,6 +122,10 @@ ion-refresher-content{
     background-color: #FFC857 !important;
 }
 
+.tab-button-text{
+    font-family: "Rokkitt";
+    font-size: 13px !important;
+}
 .ion-navbar{
     background-color: #E67F0D !important;   
 }

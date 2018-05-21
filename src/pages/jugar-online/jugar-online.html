@@ -31,7 +31,7 @@
   <ion-grid padding>
     <ion-row class="borderTituloPregunta">
       <!-- *ngFor="let item of preguntas; let i = index" -->
-      <ion-col col-12 text-center>
+      <ion-col col-12 text-center class="preguntaDeLaPartida">
         <!-- Escribe todos los animales que empiezen por la letra "p" -->
         {{MostrarLaPregunta}}
       </ion-col>
@@ -40,11 +40,11 @@
     <ion-row class="borderRespuestaAPregunta" *ngFor="let item of arrayRespuestasUsuario; let i = index">
       <ion-col col-2>
       </ion-col>
-      <ion-col col-6 text-left>
+      <ion-col col-6 text-left class="respuestasDelUsuario">
         {{item.respuesta}}
       </ion-col>
       <ion-col col-2 text-right>
-        <ion-icon ios="ios-{{item.icono}}" md="md-{{item.icono}}"></ion-icon>
+        <ion-icon ios="ios-{{item.icono}}" md="md-{{item.icono}}" class="icono"></ion-icon>
       </ion-col>
       <ion-col col-2>
       </ion-col>
@@ -72,7 +72,7 @@
 
   <form [formGroup]="formularioEnviarRespuestas" (ngSubmit)="guardarFormularioEnviarRespuestas()">
     <ion-item>
-      <ion-input clearInput id="inputDeEnviarRespuestas" type="text" formControlName="respuesta" placeholder="Escriba aquí" maxlength="28"></ion-input>
+      <ion-input clearInput id="inputDeEnviarRespuestas" type="text" formControlName="respuesta" placeholder="Escriba aquí" maxlength="18"></ion-input>
       <button id="botonRespuestas" clear ion-button type="submit" color="danger" small item-right [disabled]="!formularioEnviarRespuestas.valid">Siguiente</button>
     </ion-item>
   </form>
